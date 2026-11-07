@@ -16,21 +16,25 @@ const MOUNTAINS_100_DATA = [
         "name": "백무동 ~ 장터목 ~ 천왕봉 코스",
         "dist": "7.5km",
         "time": "4시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "함양"
       },
       {
         "name": "성삼재 ~ 노고단 탐방 코스",
         "dist": "4.7km",
         "time": "1시간 30분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "구례"
       },
       {
         "name": "중산리 ~ 천왕봉 최단 코스",
         "dist": "5.4km",
         "time": "4시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "산청"
       }
-    ]
+    ],
+    "city": "지리산"
   },
   {
     "id": 2,
@@ -49,21 +53,25 @@ const MOUNTAINS_100_DATA = [
         "name": "오색 ~ 대청봉 최단 코스",
         "dist": "5.0km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "양양"
       },
       {
         "name": "소공원 ~ 비선대 ~ 천불동계곡 ~ 대청봉",
         "dist": "11.0km",
         "time": "6시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "속초"
       },
       {
         "name": "소공원 ~ 흔들바위 ~ 울산바위",
         "dist": "3.8km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "속초"
       }
-    ]
+    ],
+    "city": "설악산"
   },
   {
     "id": 3,
@@ -82,21 +90,25 @@ const MOUNTAINS_100_DATA = [
         "name": "성판악 ~ 백록담 정상 코스",
         "dist": "9.6km",
         "time": "4시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "제주"
       },
       {
         "name": "관음사 ~ 백록담 정상 코스",
         "dist": "8.7km",
         "time": "5시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "제주"
       },
       {
         "name": "영실 ~ 윗세오름 ~ 어리목 코스",
         "dist": "8.4km",
         "time": "3시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "제주"
       }
-    ]
+    ],
+    "city": "제주"
   },
   {
     "id": 4,
@@ -115,21 +127,25 @@ const MOUNTAINS_100_DATA = [
         "name": "백운대 탐방지원센터 ~ 백운대 정상",
         "dist": "1.9km",
         "time": "1시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "강북"
       },
       {
         "name": "북한산성 탐방지원센터 ~ 대남문 ~ 백운대",
         "dist": "4.2km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "고양"
       },
       {
         "name": "의상봉 ~ 문수봉 능선 종주",
         "dist": "4.5km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "은평"
       }
-    ]
+    ],
+    "city": "서울"
   },
   {
     "id": 5,
@@ -148,21 +164,25 @@ const MOUNTAINS_100_DATA = [
         "name": "설천봉 곤돌라 ~ 향적봉 정상",
         "dist": "0.6km",
         "time": "20분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "무주"
       },
       {
         "name": "삼공리 ~ 구천동계곡 ~ 백련사 ~ 향적봉",
         "dist": "8.5km",
         "time": "3시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "무주"
       },
       {
         "name": "안성탐방센터 ~ 동엽령 ~ 향적봉",
         "dist": "6.8km",
         "time": "3시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "무주"
       }
-    ]
+    ],
+    "city": "무주"
   },
   {
     "id": 6,
@@ -181,21 +201,25 @@ const MOUNTAINS_100_DATA = [
         "name": "어의곡 ~ 비로봉 최단 코스",
         "dist": "5.1km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "단양"
       },
       {
         "name": "천동 ~ 비로봉 완만 코스",
         "dist": "6.8km",
         "time": "3시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "단양"
       },
       {
         "name": "희방사 ~ 연화봉 ~ 비로봉",
         "dist": "9.1km",
         "time": "4시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "영주"
       }
-    ]
+    ],
+    "city": "단양"
   },
   {
     "id": 7,
@@ -214,21 +238,25 @@ const MOUNTAINS_100_DATA = [
         "name": "유일사 매표소 ~ 장군봉 ~ 천제단",
         "dist": "4.0km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "태백"
       },
       {
         "name": "당골광장 ~ 반재 ~ 천제단",
         "dist": "4.4km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "태백"
       },
       {
         "name": "백단사 ~ 반재 ~ 천제단",
         "dist": "4.0km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "태백"
       }
-    ]
+    ],
+    "city": "태백"
   },
   {
     "id": 8,
@@ -247,21 +275,25 @@ const MOUNTAINS_100_DATA = [
         "name": "상원사 ~ 중대사자암 ~ 적멸보궁 ~ 비로봉",
         "dist": "3.5km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "평창"
       },
       {
         "name": "선재길 힐링 트레킹 (월정사 ~ 상원사)",
         "dist": "9.0km",
         "time": "3시간",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "평창"
       },
       {
         "name": "소금강 분소 ~ 구룡폭포 ~ 만물상",
         "dist": "3.0km",
         "time": "1시간 30분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "강릉"
       }
-    ]
+    ],
+    "city": "평창"
   },
   {
     "id": 9,
@@ -280,21 +312,25 @@ const MOUNTAINS_100_DATA = [
         "name": "동학사 ~ 은선폭포 ~ 관음봉 정상",
         "dist": "4.4km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "공주"
       },
       {
         "name": "갑사 ~ 용문폭포 ~ 연천봉 ~ 관음봉",
         "dist": "4.6km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "공주"
       },
       {
         "name": "동학사 ~ 남매탑 ~ 삼불봉",
         "dist": "3.5km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "공주"
       }
-    ]
+    ],
+    "city": "공주"
   },
   {
     "id": 10,
@@ -313,21 +349,25 @@ const MOUNTAINS_100_DATA = [
         "name": "증심사 ~ 중머리재 ~ 장불재 ~ 서석대",
         "dist": "4.8km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "광주"
       },
       {
         "name": "원효사 ~ 늦재 ~ 서석대",
         "dist": "5.2km",
         "time": "2시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "광주"
       },
       {
         "name": "안양산 ~ 백마능선 ~ 장불재",
         "dist": "5.5km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "화순"
       }
-    ]
+    ],
+    "city": "광주"
   },
   {
     "id": 11,
@@ -346,21 +386,25 @@ const MOUNTAINS_100_DATA = [
         "name": "법주사 ~ 세심정 ~ 문장대",
         "dist": "6.0km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "보은"
       },
       {
         "name": "화북탐방센터 ~ 문장대 최단 코스",
         "dist": "3.3km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "보은"
       },
       {
         "name": "세심정 ~ 신선대 ~ 천황봉",
         "dist": "5.7km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "보은"
       }
-    ]
+    ],
+    "city": "보은"
   },
   {
     "id": 12,
@@ -379,21 +423,25 @@ const MOUNTAINS_100_DATA = [
         "name": "백운동 ~ 만물상 ~ 서성재 ~ 칠불봉/상왕봉",
         "dist": "4.5km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "합천"
       },
       {
         "name": "해인사 ~ 토신골 ~ 상왕봉",
         "dist": "4.0km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "합천"
       },
       {
         "name": "소리길 힐링 트레킹 (홍류동 계곡)",
         "dist": "6.0km",
         "time": "2시간",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "합천"
       }
-    ]
+    ],
+    "city": "합천"
   },
   {
     "id": 13,
@@ -412,21 +460,25 @@ const MOUNTAINS_100_DATA = [
         "name": "구룡탐방센터 ~ 세렴폭포 ~ 사다리병창 ~ 비로봉",
         "dist": "5.7km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "원주"
       },
       {
         "name": "황골탐방센터 ~ 입석사 ~ 비로봉 최단",
         "dist": "4.1km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "원주"
       },
       {
         "name": "부곡탐방센터 ~ 곧은재 ~ 비로봉 완만 코스",
         "dist": "8.5km",
         "time": "4시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "원주"
       }
-    ]
+    ],
+    "city": "원주"
   },
   {
     "id": 14,
@@ -445,21 +497,25 @@ const MOUNTAINS_100_DATA = [
         "name": "덕주골 ~ 마애여래입상 ~ 영봉 정상",
         "dist": "4.9km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "제천"
       },
       {
         "name": "동창교 ~ 송계삼거리 ~ 영봉 최단",
         "dist": "4.3km",
         "time": "3시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "제천"
       },
       {
         "name": "보덕암 ~ 하봉 ~ 중봉 ~ 영봉 충주호 조망 코스",
         "dist": "6.2km",
         "time": "4시간 30분",
-        "difficulty": "최상"
+        "difficulty": "최상",
+        "city": "제천"
       }
-    ]
+    ],
+    "city": "제천"
   },
   {
     "id": 15,
@@ -478,21 +534,25 @@ const MOUNTAINS_100_DATA = [
         "name": "내장사 ~ 전망대 케이블카 ~ 연자봉",
         "dist": "2.5km",
         "time": "1시간 30분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "정읍"
       },
       {
         "name": "일주문 ~ 벽련암 ~ 서래봉 ~ 불출봉",
         "dist": "5.6km",
         "time": "3시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "정읍"
       },
       {
         "name": "내장사 ~ 신선봉 최고봉 코스",
         "dist": "4.2km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "정읍"
       }
-    ]
+    ],
+    "city": "정읍"
   },
   {
     "id": 16,
@@ -511,21 +571,25 @@ const MOUNTAINS_100_DATA = [
         "name": "도봉산역 ~ 도봉서원 ~ 마당바위 ~ 신선대 정상",
         "dist": "3.3km",
         "time": "2시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "도봉"
       },
       {
         "name": "원도봉 ~ 망월사 ~ 포대능선 ~ 신선대",
         "dist": "4.2km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "도봉"
       },
       {
         "name": "우이동 ~ 오봉 ~ 여성봉 코스",
         "dist": "5.0km",
         "time": "3시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "도봉"
       }
-    ]
+    ],
+    "city": "도봉"
   },
   {
     "id": 17,
@@ -544,21 +608,25 @@ const MOUNTAINS_100_DATA = [
         "name": "서울대 건설환경종합연구소 ~ 연주대 최단 코스",
         "dist": "2.0km",
         "time": "1시간 10분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "과천"
       },
       {
         "name": "과천향교 ~ 연주암 ~ 연주대",
         "dist": "3.2km",
         "time": "1시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "과천"
       },
       {
         "name": "사당역 ~ 관음사 ~ 연주대 능선 코스",
         "dist": "5.0km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "과천"
       }
-    ]
+    ],
+    "city": "과천"
   },
   {
     "id": 18,
@@ -577,21 +645,25 @@ const MOUNTAINS_100_DATA = [
         "name": "천황탐방센터 ~ 구름다리 ~ 바람재 ~ 천황봉",
         "dist": "3.5km",
         "time": "2시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "영암"
       },
       {
         "name": "경포대탐방센터 ~ 바람재 ~ 천황봉 최단 코스",
         "dist": "2.9km",
         "time": "1시간 50분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "영암"
       },
       {
         "name": "도갑사 ~ 억새밭 ~ 구정봉 ~ 천황봉 종주",
         "dist": "8.6km",
         "time": "5시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "영암"
       }
-    ]
+    ],
+    "city": "영암"
   },
   {
     "id": 19,
@@ -610,21 +682,25 @@ const MOUNTAINS_100_DATA = [
         "name": "갓바위 집단시설지구 ~ 관봉 갓바위",
         "dist": "2.0km",
         "time": "1시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "대구"
       },
       {
         "name": "수태골 ~ 오도재 ~ 비로봉 정상",
         "dist": "3.5km",
         "time": "2시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "대구"
       },
       {
         "name": "동화사 ~ 염불암 ~ 동봉 ~ 비로봉",
         "dist": "4.2km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "대구"
       }
-    ]
+    ],
+    "city": "대구"
   },
   {
     "id": 20,
@@ -643,21 +719,25 @@ const MOUNTAINS_100_DATA = [
         "name": "케이블카 ~ 금강구름다리 ~ 삼선계단 ~ 마천대",
         "dist": "1.5km",
         "time": "1시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "완주"
       },
       {
         "name": "집단시설지구 ~ 동심바위 ~ 마천대 도보",
         "dist": "2.1km",
         "time": "1시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "완주"
       },
       {
         "name": "수락계곡 ~ 낙조대 ~ 마천대",
         "dist": "3.8km",
         "time": "2시간 20분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "완주"
       }
-    ]
+    ],
+    "city": "완주"
   },
   {
     "id": 21,
@@ -676,15 +756,18 @@ const MOUNTAINS_100_DATA = [
         "name": "가리산자연휴양림 ~ 가삽고개 ~ 정상 코스",
         "dist": "4.2km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "홍천"
       },
       {
         "name": "물노리선착장 ~ 가은고개 ~ 정상 코스",
         "dist": "5.5km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "홍천"
       }
-    ]
+    ],
+    "city": "홍천"
   },
   {
     "id": 22,
@@ -703,15 +786,18 @@ const MOUNTAINS_100_DATA = [
         "name": "장구목이입구 ~ 이끼계곡 ~ 정상 최단 코스",
         "dist": "4.2km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "정선"
       },
       {
         "name": "회동리 휴양림 ~ 심마니교 ~ 어은골 ~ 정상",
         "dist": "6.0km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "정선"
       }
-    ]
+    ],
+    "city": "정선"
   },
   {
     "id": 23,
@@ -730,15 +816,18 @@ const MOUNTAINS_100_DATA = [
         "name": "석남터널 ~ 석남고개 ~ 쌀바위 ~ 정상 코스",
         "dist": "3.3km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "밀양"
       },
       {
         "name": "운문령 ~ 귀바위 ~ 쌀바위 ~ 정상 능선길",
         "dist": "5.0km",
         "time": "2시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "밀양"
       }
-    ]
+    ],
+    "city": "밀양"
   },
   {
     "id": 24,
@@ -757,15 +846,18 @@ const MOUNTAINS_100_DATA = [
         "name": "출렁다리 ~ 범륜사 ~ 악귀봉 ~ 임꺽정봉 ~ 정상",
         "dist": "3.9km",
         "time": "2시간 20분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "파주"
       },
       {
         "name": "신암저수지 ~ 신암사 ~ 얼굴바위 ~ 정상",
         "dist": "3.5km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "파주"
       }
-    ]
+    ],
+    "city": "파주"
   },
   {
     "id": 25,
@@ -784,15 +876,18 @@ const MOUNTAINS_100_DATA = [
         "name": "관리사무소 ~ 병풍폭포 ~ 구름다리(현수교) ~ 왕자봉",
         "dist": "3.2km",
         "time": "1시간 40분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "순창"
       },
       {
         "name": "강천사 ~ 구장군폭포 ~ 깃대봉 종주 코스",
         "dist": "5.0km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "순창"
       }
-    ]
+    ],
+    "city": "순창"
   },
   {
     "id": 26,
@@ -811,15 +906,18 @@ const MOUNTAINS_100_DATA = [
         "name": "운두령 ~ 쉼터 ~ 전망대 ~ 정상 최단 코스",
         "dist": "4.1km",
         "time": "2시간 20분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "평창"
       },
       {
         "name": "이승복생가터 ~ 노동계곡 ~ 정상 코스",
         "dist": "5.8km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "평창"
       }
-    ]
+    ],
+    "city": "평창"
   },
   {
     "id": 27,
@@ -838,15 +936,18 @@ const MOUNTAINS_100_DATA = [
         "name": "공작골 ~ 안부삼거리 ~ 공작능선 ~ 정상 코스",
         "dist": "2.7km",
         "time": "1시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "홍천"
       },
       {
         "name": "수타사 ~ 수타사산소길 ~ 공작산 생태숲길",
         "dist": "3.8km",
         "time": "1시간 40분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "홍천"
       }
-    ]
+    ],
+    "city": "홍천"
   },
   {
     "id": 28,
@@ -865,15 +966,18 @@ const MOUNTAINS_100_DATA = [
         "name": "적암리마을회관 ~ 신선대 ~ 정상 코스",
         "dist": "4.3km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "보은"
       },
       {
         "name": "구병리마을 ~ 쌀난바위 ~ 백운대 ~ 정상",
         "dist": "3.6km",
         "time": "2시간 10분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "보은"
       }
-    ]
+    ],
+    "city": "보은"
   },
   {
     "id": 29,
@@ -892,15 +996,18 @@ const MOUNTAINS_100_DATA = [
         "name": "복곡제2주차장 ~ 보리암 ~ 망대(정상) 최단 코스",
         "dist": "1.2km",
         "time": "40분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "남해"
       },
       {
         "name": "상주해수욕장 ~ 쌍홍문 ~ 보리암 ~ 정상",
         "dist": "3.2km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "남해"
       }
-    ]
+    ],
+    "city": "남해"
   },
   {
     "id": 30,
@@ -919,15 +1026,18 @@ const MOUNTAINS_100_DATA = [
         "name": "상천주차장 ~ 용담폭포 ~ 망덕봉 ~ 정상 코스",
         "dist": "4.5km",
         "time": "2시간 50분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "제천"
       },
       {
         "name": "상학주차장 ~ 남근석공원 ~ 정상 최단 코스",
         "dist": "2.8km",
         "time": "1시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "제천"
       }
-    ]
+    ],
+    "city": "제천"
   },
   {
     "id": 31,
@@ -946,15 +1056,18 @@ const MOUNTAINS_100_DATA = [
         "name": "금오산주차장 ~ 대혜폭포 ~ 할딱고개 ~ 현월봉(정상)",
         "dist": "3.4km",
         "time": "2시간 10분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "구미"
       },
       {
         "name": "환경연수원 ~ 칼다봉능선 ~ 성안 ~ 현월봉",
         "dist": "5.1km",
         "time": "3시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "구미"
       }
-    ]
+    ],
+    "city": "구미"
   },
   {
     "id": 32,
@@ -973,15 +1086,18 @@ const MOUNTAINS_100_DATA = [
         "name": "범어사 ~ 북문 ~ 고당봉 정상 코스",
         "dist": "3.6km",
         "time": "1시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "부산"
       },
       {
         "name": "산성마을 ~ 동문 ~ 제4망루 ~ 원효봉 ~ 고당봉",
         "dist": "5.4km",
         "time": "2시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "부산"
       }
-    ]
+    ],
+    "city": "부산"
   },
   {
     "id": 33,
@@ -1000,9 +1116,11 @@ const MOUNTAINS_100_DATA = [
         "name": "홍도1구항 ~ 흑산초교홍도분교 ~ 깃대봉 정상",
         "dist": "1.9km",
         "time": "1시간 20분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "신안"
       }
-    ]
+    ],
+    "city": "신안"
   },
   {
     "id": 34,
@@ -1021,15 +1139,18 @@ const MOUNTAINS_100_DATA = [
         "name": "삼릉탐방지원센터 ~ 상선암 ~ 금오봉 정상",
         "dist": "2.6km",
         "time": "1시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "경주"
       },
       {
         "name": "포석정주차장 ~ 부흥사 ~ 금오봉 코스",
         "dist": "3.1km",
         "time": "1시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "경주"
       }
-    ]
+    ],
+    "city": "경주"
   },
   {
     "id": 35,
@@ -1048,15 +1169,18 @@ const MOUNTAINS_100_DATA = [
         "name": "보경사 ~ 상생폭포 ~ 연산폭포 ~ 삼지봉 코스",
         "dist": "5.8km",
         "time": "3시간 10분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "포항"
       },
       {
         "name": "문수사 ~ 문수봉 ~ 삼지봉 능선 코스",
         "dist": "4.2km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "포항"
       }
-    ]
+    ],
+    "city": "포항"
   },
   {
     "id": 36,
@@ -1075,9 +1199,11 @@ const MOUNTAINS_100_DATA = [
         "name": "용늪탐방안내소 ~ 서흥리 ~ 용늪 ~ 대암산 정상",
         "dist": "5.0km",
         "time": "2시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "양구"
       }
-    ]
+    ],
+    "city": "양구"
   },
   {
     "id": 37,
@@ -1096,15 +1222,18 @@ const MOUNTAINS_100_DATA = [
         "name": "용추계곡주차장 ~ 월영대 ~ 밀재 ~ 대야산 정상",
         "dist": "4.8km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "문경"
       },
       {
         "name": "피아골 ~ 정상 최단 코스 (급경사 암릉)",
         "dist": "3.6km",
         "time": "2시간 20분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "문경"
       }
-    ]
+    ],
+    "city": "문경"
   },
   {
     "id": 38,
@@ -1123,9 +1252,11 @@ const MOUNTAINS_100_DATA = [
         "name": "수덕사주차장 ~ 일주문 ~ 정혜사 ~ 덕숭산 정상",
         "dist": "2.8km",
         "time": "1시간 30분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "예산"
       }
-    ]
+    ],
+    "city": "예산"
   },
   {
     "id": 39,
@@ -1144,15 +1275,18 @@ const MOUNTAINS_100_DATA = [
         "name": "상선암주차장 ~ 제봉 ~ 신선봉 ~ 도락산 정상",
         "dist": "3.2km",
         "time": "2시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "단양"
       },
       {
         "name": "채운봉 ~ 형봉 ~ 도락산 정상 암릉 순환길",
         "dist": "4.0km",
         "time": "2시간 50분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "단양"
       }
-    ]
+    ],
+    "city": "단양"
   },
   {
     "id": 40,
@@ -1171,15 +1305,18 @@ const MOUNTAINS_100_DATA = [
         "name": "대흥사주차장 ~ 표충사 ~ 북미륵암 ~ 가련봉 정상",
         "dist": "3.8km",
         "time": "2시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "해남"
       },
       {
         "name": "오심재 ~ 흔들바위 ~ 노승봉 ~ 가련봉 코스",
         "dist": "3.2km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "해남"
       }
-    ]
+    ],
+    "city": "해남"
   },
   {
     "id": 41,
@@ -1198,15 +1335,18 @@ const MOUNTAINS_100_DATA = [
         "name": "무릉계곡매표소 ~ 베틀바위산성길 ~ 미륵바위 ~ 두타산 정상",
         "dist": "6.1km",
         "time": "3시간 40분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "동해"
       },
       {
         "name": "천은사 ~ 쉰움산 ~ 두타산 정상 코스",
         "dist": "4.8km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "동해"
       }
-    ]
+    ],
+    "city": "동해"
   },
   {
     "id": 42,
@@ -1225,15 +1365,18 @@ const MOUNTAINS_100_DATA = [
         "name": "상방리주차장 ~ 1004계단로 ~ 참성단 정상",
         "dist": "2.4km",
         "time": "1시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "강화"
       },
       {
         "name": "함허동천야영장 ~ 능선로 ~ 칠선녀계단 ~ 참성단",
         "dist": "3.1km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "강화"
       }
-    ]
+    ],
+    "city": "강화"
   },
   {
     "id": 43,
@@ -1252,15 +1395,18 @@ const MOUNTAINS_100_DATA = [
         "name": "남부주차장 ~ 금당사 ~ 탑사 ~ 은수사 ~ 암마이봉",
         "dist": "2.7km",
         "time": "1시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "진안"
       },
       {
         "name": "북부주차장 ~ 사양제 ~ 계단길 ~ 암마이봉 정상",
         "dist": "1.9km",
         "time": "1시간 10분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "진안"
       }
-    ]
+    ],
+    "city": "진안"
   },
   {
     "id": 44,
@@ -1279,15 +1425,18 @@ const MOUNTAINS_100_DATA = [
         "name": "산정호수상동주차장 ~ 비선폭포 ~ 억새군락지 ~ 팔각정",
         "dist": "4.2km",
         "time": "2시간 20분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "포천"
       },
       {
         "name": "자인사 ~ 급경사돌계단 ~ 억새풍경 ~ 정상",
         "dist": "3.0km",
         "time": "2시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "포천"
       }
-    ]
+    ],
+    "city": "포천"
   },
   {
     "id": 45,
@@ -1306,9 +1455,11 @@ const MOUNTAINS_100_DATA = [
         "name": "익근리주차장 ~ 승천사 ~ 명지폭포 ~ 명지1봉(정상)",
         "dist": "6.0km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "가평"
       }
-    ]
+    ],
+    "city": "가평"
   },
   {
     "id": 46,
@@ -1327,15 +1478,18 @@ const MOUNTAINS_100_DATA = [
         "name": "모악산관광단지 ~ 대원사 ~ 수왕사 ~ 모악산 정상",
         "dist": "3.0km",
         "time": "1시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "김제"
       },
       {
         "name": "금산사주차장 ~ 심원정 ~ 케이블카탑 ~ 정상",
         "dist": "4.8km",
         "time": "2시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "김제"
       }
-    ]
+    ],
+    "city": "김제"
   },
   {
     "id": 47,
@@ -1354,9 +1508,11 @@ const MOUNTAINS_100_DATA = [
         "name": "서원곡주차장 ~ 무학폭포 ~ 걱정바위 ~ 무학산 정상",
         "dist": "3.2km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "창원"
       }
-    ]
+    ],
+    "city": "창원"
   },
   {
     "id": 48,
@@ -1375,15 +1531,18 @@ const MOUNTAINS_100_DATA = [
         "name": "케이블카상부역사 ~ 봉수대 ~ 미륵산 정상 전망대",
         "dist": "0.6km",
         "time": "20분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "통영"
       },
       {
         "name": "용화사광장 ~ 관음암 ~ 미륵재 ~ 미륵산 정상",
         "dist": "2.1km",
         "time": "1시간 10분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "통영"
       }
-    ]
+    ],
+    "city": "통영"
   },
   {
     "id": 49,
@@ -1402,15 +1561,18 @@ const MOUNTAINS_100_DATA = [
         "name": "물한계곡주차장 ~ 옥소폭포 ~ 삼도봉 ~ 민주지산 정상",
         "dist": "6.2km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "영동"
       },
       {
         "name": "도마령 ~ 각호산 ~ 민주지산 능선 종주",
         "dist": "4.8km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "영동"
       }
-    ]
+    ],
+    "city": "영동"
   },
   {
     "id": 50,
@@ -1429,15 +1591,18 @@ const MOUNTAINS_100_DATA = [
         "name": "방장산자연휴양림 ~ 패러글라이딩활공장 ~ 봉수대 ~ 정상",
         "dist": "3.5km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "장성"
       },
       {
         "name": "장성갈재 ~ 쓰리봉 ~ 봉수대 ~ 방장산 정상",
         "dist": "4.8km",
         "time": "2시간 50분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "장성"
       }
-    ]
+    ],
+    "city": "장성"
   },
   {
     "id": 51,
@@ -1456,15 +1621,18 @@ const MOUNTAINS_100_DATA = [
         "name": "방태산자연휴양림 ~ 마당바위 ~ 주억봉(정상) 최단 코스",
         "dist": "4.2km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "인제"
       },
       {
         "name": "휴양림 ~ 삼거리 ~ 주억봉 ~ 구룡덕봉 능선 순환",
         "dist": "7.5km",
         "time": "4시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "인제"
       }
-    ]
+    ],
+    "city": "인제"
   },
   {
     "id": 52,
@@ -1483,9 +1651,11 @@ const MOUNTAINS_100_DATA = [
         "name": "문재터널 ~ 사자산분기점 ~ 헬기장 ~ 백덕산 정상",
         "dist": "5.6km",
         "time": "3시간 10분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "영월"
       }
-    ]
+    ],
+    "city": "영월"
   },
   {
     "id": 53,
@@ -1504,15 +1674,18 @@ const MOUNTAINS_100_DATA = [
         "name": "백양사탐방지원센터 ~ 약사암 ~ 백학봉 ~ 상왕봉(정상)",
         "dist": "4.8km",
         "time": "2시간 50분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "장성"
       },
       {
         "name": "남창골 ~ 운문암 ~ 상왕봉 순환 코스",
         "dist": "5.2km",
         "time": "3시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "장성"
       }
-    ]
+    ],
+    "city": "장성"
   },
   {
     "id": 54,
@@ -1531,15 +1704,18 @@ const MOUNTAINS_100_DATA = [
         "name": "옥룡면 진틀마을 ~ 병암폭포 ~ 신선대 ~ 상봉(정상)",
         "dist": "3.3km",
         "time": "2시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "광양"
       },
       {
         "name": "동동마을 ~ 한재 ~ 백운산 상봉 코스",
         "dist": "4.5km",
         "time": "2시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "광양"
       }
-    ]
+    ],
+    "city": "광양"
   },
   {
     "id": 55,
@@ -1558,9 +1734,11 @@ const MOUNTAINS_100_DATA = [
         "name": "문희마을 ~ 백룡동굴 ~ 칠족령 전망대 ~ 백운산 정상",
         "dist": "3.8km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "정선"
       }
-    ]
+    ],
+    "city": "정선"
   },
   {
     "id": 56,
@@ -1579,9 +1757,11 @@ const MOUNTAINS_100_DATA = [
         "name": "백운계곡주차장 ~ 흥룡사 ~ 선유담 ~ 백운산 정상",
         "dist": "3.6km",
         "time": "2시간 10분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "포천"
       }
-    ]
+    ],
+    "city": "포천"
   },
   {
     "id": 57,
@@ -1600,15 +1780,18 @@ const MOUNTAINS_100_DATA = [
         "name": "내소사주차장 ~ 일주문 ~ 관음봉삼거리 ~ 관음봉 정상",
         "dist": "3.0km",
         "time": "1시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "부안"
       },
       {
         "name": "남여치 ~ 월명암 ~ 직소폭포 ~ 관음봉 종주",
         "dist": "6.8km",
         "time": "4시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "부안"
       }
-    ]
+    ],
+    "city": "부안"
   },
   {
     "id": 58,
@@ -1627,15 +1810,18 @@ const MOUNTAINS_100_DATA = [
         "name": "유가사주차장 ~ 수도암 ~ 천왕봉 정상 최단 코스",
         "dist": "3.5km",
         "time": "2시간 10분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "달성"
       },
       {
         "name": "비슬산자연휴양림 ~ 참꽃군락지 ~ 대견봉 ~ 천왕봉",
         "dist": "5.5km",
         "time": "3시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "달성"
       }
-    ]
+    ],
+    "city": "달성"
   },
   {
     "id": 59,
@@ -1654,15 +1840,18 @@ const MOUNTAINS_100_DATA = [
         "name": "의암매표소 ~ 상원사 ~ 깔딱고개 ~ 용화봉(정상)",
         "dist": "2.2km",
         "time": "1시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "춘천"
       },
       {
         "name": "강촌매표소 ~ 등선폭포 ~ 흥국사 ~ 용화봉 코스",
         "dist": "3.2km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "춘천"
       }
-    ]
+    ],
+    "city": "춘천"
   },
   {
     "id": 60,
@@ -1681,9 +1870,11 @@ const MOUNTAINS_100_DATA = [
         "name": "선운사주차장 ~ 도솔암 ~ 천마봉 ~ 낙조대 ~ 수리봉",
         "dist": "4.5km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "고창"
       }
-    ]
+    ],
+    "city": "고창"
   },
   {
     "id": 61,
@@ -1702,9 +1893,11 @@ const MOUNTAINS_100_DATA = [
         "name": "소요산역 ~ 자재암 ~ 하백운대 ~ 중백운대 ~ 상백운대 ~ 의상대",
         "dist": "4.3km",
         "time": "2시간 50분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "동두천"
       }
-    ]
+    ],
+    "city": "동두천"
   },
   {
     "id": 62,
@@ -1723,15 +1916,18 @@ const MOUNTAINS_100_DATA = [
         "name": "영남알프스복합웰컴센터 ~ 홍류폭포 ~ 칼바위공룡능선 ~ 정상",
         "dist": "4.5km",
         "time": "3시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "울주"
       },
       {
         "name": "간월재휴게소 ~ 신불평원 ~ 신불산 정상 억새길",
         "dist": "3.0km",
         "time": "1시간 40분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "울주"
       }
-    ]
+    ],
+    "city": "울주"
   },
   {
     "id": 63,
@@ -1750,9 +1946,11 @@ const MOUNTAINS_100_DATA = [
         "name": "옥천사주차장 ~ 남산고개 ~ 연화산 정상 순환 코스",
         "dist": "3.2km",
         "time": "1시간 50분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "고성"
       }
-    ]
+    ],
+    "city": "고성"
   },
   {
     "id": 64,
@@ -1771,15 +1969,18 @@ const MOUNTAINS_100_DATA = [
         "name": "청평사선착장 ~ 청평사 ~ 해탈문 ~ 오봉산 정상",
         "dist": "2.8km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "춘천"
       },
       {
         "name": "배후령 ~ 1봉 ~ 2봉 ~ 3봉 ~ 4봉 ~ 5봉(정상)",
         "dist": "3.5km",
         "time": "2시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "춘천"
       }
-    ]
+    ],
+    "city": "춘천"
   },
   {
     "id": 65,
@@ -1798,9 +1999,11 @@ const MOUNTAINS_100_DATA = [
         "name": "용문사관광단지 ~ 천년은행나무 ~ 마당바위 ~ 가섭봉(정상)",
         "dist": "4.2km",
         "time": "3시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "양평"
       }
-    ]
+    ],
+    "city": "양평"
   },
   {
     "id": 66,
@@ -1819,15 +2022,18 @@ const MOUNTAINS_100_DATA = [
         "name": "큰고개주차장 ~ 만장봉 ~ 촛대바위 ~ 용화산 정상 최단 코스",
         "dist": "1.3km",
         "time": "50분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "춘천"
       },
       {
         "name": "양통마을 ~ 폭포 ~ 안부 ~ 용화산 정상",
         "dist": "3.8km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "춘천"
       }
-    ]
+    ],
+    "city": "춘천"
   },
   {
     "id": 67,
@@ -1846,15 +2052,18 @@ const MOUNTAINS_100_DATA = [
         "name": "상양마을 ~ 아랫재 ~ 운문산 정상 최단 코스",
         "dist": "3.5km",
         "time": "2시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "청도"
       },
       {
         "name": "석골사주차장 ~ 억산갈림길 ~ 딱밭재 ~ 정상",
         "dist": "5.2km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "청도"
       }
-    ]
+    ],
+    "city": "청도"
   },
   {
     "id": 68,
@@ -1873,15 +2082,18 @@ const MOUNTAINS_100_DATA = [
         "name": "운악산광장(포천) ~ 눈썹바위 ~ 미륵바위 ~ 망경대(정상)",
         "dist": "3.2km",
         "time": "2시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "포천"
       },
       {
         "name": "하판리주차장(가평) ~ 현등사 ~ 절고개 ~ 망경대",
         "dist": "3.8km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "포천"
       }
-    ]
+    ],
+    "city": "포천"
   },
   {
     "id": 69,
@@ -1900,9 +2112,11 @@ const MOUNTAINS_100_DATA = [
         "name": "피암목재휴게소 ~ 활목재 ~ 칠성대(서봉) ~ 운장대(정상)",
         "dist": "3.0km",
         "time": "2시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "진안"
       }
-    ]
+    ],
+    "city": "진안"
   },
   {
     "id": 70,
@@ -1921,9 +2135,11 @@ const MOUNTAINS_100_DATA = [
         "name": "유명산자연휴양림 ~ 계곡로 ~ 박마당 ~ 유명산 정상",
         "dist": "4.1km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "가평"
       }
-    ]
+    ],
+    "city": "가평"
   },
   {
     "id": 71,
@@ -1942,9 +2158,11 @@ const MOUNTAINS_100_DATA = [
         "name": "덕구온천주차장 ~ 덕구계곡 ~ 온천원탕 ~ 응봉산 정상",
         "dist": "5.7km",
         "time": "3시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "울진"
       }
-    ]
+    ],
+    "city": "울진"
   },
   {
     "id": 72,
@@ -1963,9 +2181,11 @@ const MOUNTAINS_100_DATA = [
         "name": "무룡고개주차장 ~ 억새능선전망대 ~ 장안산 정상 최단 코스",
         "dist": "3.2km",
         "time": "1시간 40분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "장수"
       }
-    ]
+    ],
+    "city": "장수"
   },
   {
     "id": 73,
@@ -1984,9 +2204,11 @@ const MOUNTAINS_100_DATA = [
         "name": "표충사주차장 ~ 흑룡폭포 ~ 층층폭포 ~ 사자평 ~ 수미봉(정상)",
         "dist": "5.5km",
         "time": "3시간 20분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "밀양"
       }
-    ]
+    ],
+    "city": "밀양"
   },
   {
     "id": 74,
@@ -2005,15 +2227,18 @@ const MOUNTAINS_100_DATA = [
         "name": "안국사주차장 ~ 안련대 ~ 향로봉(정상) 최단 코스",
         "dist": "1.8km",
         "time": "1시간",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "무주"
       },
       {
         "name": "서창마을 ~ 장도바위 ~ 서문 ~ 안국사 ~ 향로봉",
         "dist": "4.2km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "무주"
       }
-    ]
+    ],
+    "city": "무주"
   },
   {
     "id": 75,
@@ -2032,9 +2257,11 @@ const MOUNTAINS_100_DATA = [
         "name": "진동계곡탐방안내소 ~ 강선마을 ~ 곰배령 생태탐방로",
         "dist": "5.1km",
         "time": "2시간 30분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "인제"
       }
-    ]
+    ],
+    "city": "인제"
   },
   {
     "id": 76,
@@ -2053,15 +2280,18 @@ const MOUNTAINS_100_DATA = [
         "name": "송광사탐방지원센터 ~ 굴목재 ~ 보리밥집 ~ 연산봉(정상)",
         "dist": "5.5km",
         "time": "3시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "순천"
       },
       {
         "name": "선암사주차장 ~ 대각암 ~ 장군봉(정상)",
         "dist": "4.2km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "순천"
       }
-    ]
+    ],
+    "city": "순천"
   },
   {
     "id": 77,
@@ -2080,15 +2310,18 @@ const MOUNTAINS_100_DATA = [
         "name": "상의주차장 ~ 대전사 ~ 용추폭포(제1폭포) ~ 주봉 정상",
         "dist": "4.5km",
         "time": "2시간 30분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "청송"
       },
       {
         "name": "절골탐방지원센터 ~ 대문다리 ~ 가메봉 정상 트레킹",
         "dist": "6.8km",
         "time": "4시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "청송"
       }
-    ]
+    ],
+    "city": "청송"
   },
   {
     "id": 78,
@@ -2107,9 +2340,11 @@ const MOUNTAINS_100_DATA = [
         "name": "문경새재제1관문 ~ 혜국사 ~ 주봉(정상) 코스",
         "dist": "4.5km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "문경"
       }
-    ]
+    ],
+    "city": "문경"
   },
   {
     "id": 79,
@@ -2128,9 +2363,11 @@ const MOUNTAINS_100_DATA = [
         "name": "증산초등학교 ~ 쉼터 ~ 억새군락지 ~ 민둥산 정상",
         "dist": "2.8km",
         "time": "1시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "정선"
       }
-    ]
+    ],
+    "city": "정선"
   },
   {
     "id": 80,
@@ -2149,9 +2386,11 @@ const MOUNTAINS_100_DATA = [
         "name": "축령산자연휴양림 ~ 수리바위 ~ 남이바위 ~ 축령산 정상",
         "dist": "2.8km",
         "time": "2시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "남양주"
       }
-    ]
+    ],
+    "city": "남양주"
   },
   {
     "id": 81,
@@ -2170,15 +2409,18 @@ const MOUNTAINS_100_DATA = [
         "name": "장곡사주차장 ~ 삼형제봉 ~ 칠갑산 정상",
         "dist": "3.0km",
         "time": "1시간 40분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "청양"
       },
       {
         "name": "천장호출렁다리 ~ 칠갑산 정상 힐링 코스",
         "dist": "3.5km",
         "time": "2시간",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "청양"
       }
-    ]
+    ],
+    "city": "청양"
   },
   {
     "id": 82,
@@ -2197,9 +2439,11 @@ const MOUNTAINS_100_DATA = [
         "name": "고씨동굴주차장 ~ 전망대 ~ 태화산 정상 코스",
         "dist": "4.1km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "영월"
       }
-    ]
+    ],
+    "city": "영월"
   },
   {
     "id": 83,
@@ -2218,9 +2462,11 @@ const MOUNTAINS_100_DATA = [
         "name": "팔봉산유원지매표소 ~ 1봉 ~ 2봉(정상) ~ 3봉 ~ 8봉 종주",
         "dist": "2.6km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "홍천"
       }
-    ]
+    ],
+    "city": "홍천"
   },
   {
     "id": 84,
@@ -2239,9 +2485,11 @@ const MOUNTAINS_100_DATA = [
         "name": "능가사주차장 ~ 1봉(유덕봉) ~ 8봉(적취봉) ~ 깃대봉(정상)",
         "dist": "4.6km",
         "time": "3시간 30분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "고흥"
       }
-    ]
+    ],
+    "city": "고흥"
   },
   {
     "id": 85,
@@ -2260,15 +2508,18 @@ const MOUNTAINS_100_DATA = [
         "name": "화악터널쌈지공원 ~ 실운현 ~ 중봉(정상) 최단 코스",
         "dist": "4.5km",
         "time": "2시간 20분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "가평"
       },
       {
         "name": "삼팔교 ~ 조무락골 ~ 복호동폭포 ~ 중봉",
         "dist": "6.2km",
         "time": "3시간 50분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "가평"
       }
-    ]
+    ],
+    "city": "가평"
   },
   {
     "id": 86,
@@ -2287,15 +2538,18 @@ const MOUNTAINS_100_DATA = [
         "name": "자하곡매표소 ~ 전망대 ~ 환장고개 ~ 화왕산 억새평원(정상)",
         "dist": "2.6km",
         "time": "1시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "창녕"
       },
       {
         "name": "옥천매표소 ~ 관룡사 ~ 용선대 ~ 허준세트장 ~ 화왕산",
         "dist": "4.8km",
         "time": "2시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "창녕"
       }
-    ]
+    ],
+    "city": "창녕"
   },
   {
     "id": 87,
@@ -2314,15 +2568,18 @@ const MOUNTAINS_100_DATA = [
         "name": "황매산오토캠핑장주차장 ~ 철쭉군락지 ~ 황매봉 정상 최단 코스",
         "dist": "1.7km",
         "time": "50분",
-        "difficulty": "하"
+        "difficulty": "하",
+        "city": "합천"
       },
       {
         "name": "덕만주차장 ~ 모산재 ~ 철쭉제단 ~ 황매봉",
         "dist": "4.2km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "합천"
       }
-    ]
+    ],
+    "city": "합천"
   },
   {
     "id": 88,
@@ -2341,9 +2598,11 @@ const MOUNTAINS_100_DATA = [
         "name": "직지사주차장 ~ 운수암 ~ 백운봉 ~ 비로봉(정상)",
         "dist": "4.8km",
         "time": "2시간 50분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "김천"
       }
-    ]
+    ],
+    "city": "김천"
   },
   {
     "id": 89,
@@ -2362,9 +2621,11 @@ const MOUNTAINS_100_DATA = [
         "name": "안생달주차장 ~ 와인동굴 ~ 묏등바위 ~ 황장산 정상",
         "dist": "2.6km",
         "time": "1시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "문경"
       }
-    ]
+    ],
+    "city": "문경"
   },
   {
     "id": 90,
@@ -2383,15 +2644,18 @@ const MOUNTAINS_100_DATA = [
         "name": "봉암사일주문 ~ 백운대 ~ 희양산 정상",
         "dist": "3.5km",
         "time": "2시간 30분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "문경"
       },
       {
         "name": "원탑마을 ~ 지름티재 ~ 세미클라이밍암벽 ~ 정상",
         "dist": "4.0km",
         "time": "3시간",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "문경"
       }
-    ]
+    ],
+    "city": "문경"
   },
   {
     "id": 91,
@@ -2410,9 +2674,11 @@ const MOUNTAINS_100_DATA = [
         "name": "유동마을주차장 ~ 연암골 ~ 황석산성 ~ 황석산 정상",
         "dist": "4.3km",
         "time": "2시간 50분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "함양"
       }
-    ]
+    ],
+    "city": "함양"
   },
   {
     "id": 92,
@@ -2431,15 +2697,18 @@ const MOUNTAINS_100_DATA = [
         "name": "수진사주차장 ~ 천마의집 ~ 천마산 정상",
         "dist": "2.9km",
         "time": "1시간 50분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "남양주"
       },
       {
         "name": "호평동탐방로 ~ 꺽정바위 ~ 천마산 정상",
         "dist": "3.3km",
         "time": "2시간 10분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "남양주"
       }
-    ]
+    ],
+    "city": "남양주"
   },
   {
     "id": 93,
@@ -2458,15 +2727,18 @@ const MOUNTAINS_100_DATA = [
         "name": "내원사주차장 ~ 성불암계곡 ~ 천성산(원효봉)",
         "dist": "4.5km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "양산"
       },
       {
         "name": "홍룡사주차장 ~ 홍룡폭포 ~ 화엄늪 ~ 원효봉",
         "dist": "3.6km",
         "time": "2시간 10분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "양산"
       }
-    ]
+    ],
+    "city": "양산"
   },
   {
     "id": 94,
@@ -2485,9 +2757,11 @@ const MOUNTAINS_100_DATA = [
         "name": "천관산도립공원주차장 ~ 영월정 ~ 장천재 ~ 연대봉(정상)",
         "dist": "3.4km",
         "time": "2시간 10분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "장흥"
       }
-    ]
+    ],
+    "city": "장흥"
   },
   {
     "id": 95,
@@ -2506,9 +2780,11 @@ const MOUNTAINS_100_DATA = [
         "name": "청량지문주차장 ~ 입석 ~ 응진전 ~ 청량사 ~ 하늘다리 ~ 장인봉",
         "dist": "3.8km",
         "time": "2시간 40분",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "봉화"
       }
-    ]
+    ],
+    "city": "봉화"
   },
   {
     "id": 96,
@@ -2527,9 +2803,11 @@ const MOUNTAINS_100_DATA = [
         "name": "무릉계곡주차장 ~ 학소대 ~ 연칠성령 ~ 청옥산 정상",
         "dist": "6.8km",
         "time": "4시간 10분",
-        "difficulty": "상"
+        "difficulty": "상",
+        "city": "동해"
       }
-    ]
+    ],
+    "city": "동해"
   },
   {
     "id": 97,
@@ -2548,9 +2826,11 @@ const MOUNTAINS_100_DATA = [
         "name": "추월산관광단지주차장 ~ 보리암 ~ 보리암초소 ~ 추월산 정상",
         "dist": "2.8km",
         "time": "2시간",
-        "difficulty": "중상"
+        "difficulty": "중상",
+        "city": "담양"
       }
-    ]
+    ],
+    "city": "담양"
   },
   {
     "id": 98,
@@ -2569,9 +2849,11 @@ const MOUNTAINS_100_DATA = [
         "name": "모암마을주차장 ~ 편백숲치유의숲 ~ 축령산 정상",
         "dist": "2.6km",
         "time": "1시간 30분",
-        "difficulty": "중하"
+        "difficulty": "중하",
+        "city": "장성"
       }
-    ]
+    ],
+    "city": "장성"
   },
   {
     "id": 99,
@@ -2590,15 +2872,18 @@ const MOUNTAINS_100_DATA = [
         "name": "떡바위주차장 ~ 문수암골 ~ 청석재 ~ 칠보산 정상",
         "dist": "3.8km",
         "time": "2시간 20분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "괴산"
       },
       {
         "name": "각연사주차장 ~ 칠보석 ~ 칠보산 정상",
         "dist": "2.9km",
         "time": "1시간 40분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "괴산"
       }
-    ]
+    ],
+    "city": "괴산"
   },
   {
     "id": 100,
@@ -2617,8 +2902,10 @@ const MOUNTAINS_100_DATA = [
         "name": "삼회1리마을회관 ~ 큰골계곡 ~ 야생화군락지 ~ 화야산 정상",
         "dist": "3.5km",
         "time": "2시간 10분",
-        "difficulty": "중"
+        "difficulty": "중",
+        "city": "가평"
       }
-    ]
+    ],
+    "city": "가평"
   }
 ];

@@ -440,40 +440,55 @@ function updateDrawerStatusUI(status) {
 }
 
 /**
- * 코스명에서 네이버 지도 검색용 들머리(출발지/주차장/사찰) 키워드 추출
- * 예: "가리산자연휴양림 ~ 가삽고개 ~ 정상" -> "가리산자연휴양림"
- * 예: "오색 ~ 대청봉 최단 코스" -> "설악산 오색"
- * 예: "1코스", "정규 1코스" (들머리 명시 없음) -> "가리왕산 등산로"
+ * 코스명에서 네이버 지도 검색용 [지역명(시·군) + 들머리] 키워드 추출
+ * 예: 금산(남해) + "복곡제2주차장 ~ 보리암" -> "남해 복곡제2주차장" (산이름 대신 시군명 검색으로 100% 인식)
+ * 예: 지리산(함양) + "백무동 ~ 천왕봉" -> "함양 백무동"
+ * 예: 덕숭산(예산) + "수덕사주차장 ~ 정상" -> "예산 수덕사주차장"
+ * 예: 들머리 없는 경우 -> "광주 무등산 등산로"
  */
-function extractTrailheadQuery(mountainName, courseName) {
-  if (!courseName) return `${mountainName} 등산로`;
+function extractTrailheadQuery(mountain, course) {
+  const mName = (mountain && mountain.name) ? mountain.name : '';
+  const cName = typeof course === 'string' ? course : (course ? course.name : '');
+  const city = (course && course.city) ? course.city : ((mountain && mountain.city) ? mountain.city : '');
+
+  if (!cName) {
+    return city ? `${city} ${mName} 등산로` : `${mName} 등산로`;
+  }
 
   // 1. 구분자(~, -, ->, ,, /) 기준으로 첫 번째 시작 지점 분리
-  const parts = courseName.split(/[~–—\->,/]/);
+  const parts = cName.split(/[~–—\->,/]/);
   let start = (parts[0] || '').trim();
 
   // 2. 괄호 내용 제거
   start = start.replace(/\(.*?\)/g, '').trim();
 
-  // 3. 제1코스, 정규1코스, 완주코스, 1코스 등 들머리 없는 generic 패턴 감지 -> [산이름 등산로]로 안전 Fallback
+  // 3. 제1코스, 정규1코스, 완주코스, 1코스 등 들머리 없는 generic 패턴 감지 -> [지역명 산이름 등산로]로 안전 Fallback
   const isGeneric = /정규|완주|\d+코스|^제?\d+|^코스/g.test(start);
   if (isGeneric || !start) {
-    return `${mountainName} 등산로`;
+    return city ? `${city} ${mName} 등산로` : `${mName} 등산로`;
   }
 
   // 4. 사족 접미사 정제 (탐방로, 등산로, 최단, 원점회귀, 종주, 코스 등)
   start = start.replace(/탐방로|등산로|최단|원점회귀|종주|코스$/g, '').trim();
 
   if (!start) {
-    return `${mountainName} 등산로`;
+    return city ? `${city} ${mName} 등산로` : `${mName} 등산로`;
   }
 
-  // 5. 산 이름이 이미 시작 지점에 포함되어 있으면 중복 방지 (예: "가리산자연휴양림")
-  if (start.startsWith(mountainName)) {
+  // 5. 시작 지점에 이미 지역명(city) 또는 산 이름이 포함되어 있으면 중복 방지
+  if (city && start.startsWith(city)) {
+    return start;
+  }
+  if (start.startsWith(mName)) {
     return start;
   }
 
-  return `${mountainName} ${start}`;
+  // 6. 지역명(시·군) + 들머리 키워드 결합 (예: "남해 복곡제2주차장", "예산 수덕사", "정선 장구목이")
+  if (city) {
+    return `${city} ${start}`;
+  }
+
+  return `${mName} ${start}`;
 }
 
 /**
@@ -597,8 +612,8 @@ function renderCoursesList(m) {
     const linksDiv = document.createElement('div');
     linksDiv.className = 'course-links';
 
-    // 3안: 카카오맵 삭제 & 네이버 들머리 지도 단일 버튼 (들머리 없는 코스는 [산이름 등산로]로 자동 검색)
-    const trailheadQuery = extractTrailheadQuery(m.name, c.name);
+    // 3안: 카카오맵 삭제 & 네이버 들머리 지도 단일 버튼 ([지역명(시·군) + 들머리]로 정확도 극대화)
+    const trailheadQuery = extractTrailheadQuery(m, c);
 
     const naverLink = document.createElement('a');
     naverLink.className = 'map-btn naver-btn';
