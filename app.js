@@ -5,6 +5,11 @@
 
 const STORAGE_KEY = 'korea_100_mountains_records_v1';
 
+// 대한민국 지도 데이터 전역 바인딩 호환성 보장
+if (typeof KOREA_167_GEO !== 'undefined' && typeof KOREA_MAP_167_DATA === 'undefined') {
+  window.KOREA_MAP_167_DATA = KOREA_167_GEO;
+}
+
 // 상태 관리
 let climbRecords = {};
 let selectedMountainId = null;
@@ -114,13 +119,16 @@ function getPinColor(mId) {
  */
 function initMap() {
   // 1. 대한민국 시군구 배경 레이어 렌더링
-  if (typeof KOREA_MAP_167_DATA !== 'undefined' && KOREA_MAP_167_DATA.features) {
+  const mapData = (typeof KOREA_MAP_167_DATA !== 'undefined') ? KOREA_MAP_167_DATA : ((typeof KOREA_167_GEO !== 'undefined') ? KOREA_167_GEO : null);
+  if (mapData && mapData.features) {
     gLand.selectAll('path')
-      .data(KOREA_MAP_167_DATA.features)
+      .data(mapData.features)
       .enter()
       .append('path')
       .attr('class', 'sigungu-path')
-      .attr('d', path);
+      .attr('d', path)
+      .append('title')
+      .text(d => `${d.properties.fullName || d.properties.name}`);
   }
 
   // 2. 100대 명산 마커 핀 렌더링

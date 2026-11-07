@@ -355,10 +355,15 @@ body {
 
 /* 대한민국 시군구 배경 레이어 */
 .sigungu-path {
-  fill: var(--bg-land);
-  stroke: var(--c-stroke);
-  stroke-width: 0.5px;
-  transition: fill 0.2s;
+  fill: #ffffff;
+  stroke: #94a3b8;
+  stroke-width: 0.65px;
+  transition: fill 0.2s, stroke 0.2s;
+}
+
+.sigungu-path:hover {
+  fill: #f0fdf4;
+  stroke: #059669;
 }
 
 /* 100대 명산 마커 핀 */
