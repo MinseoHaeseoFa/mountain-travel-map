@@ -304,6 +304,13 @@ body {
   color: #7f1d1d;
 }
 
+/* 도구 버튼 및 인라인 폼 숨김 상태 */
+.btn-delete-mountain.hidden,
+.btn-reset-tool.hidden,
+.add-course-form.hidden {
+  display: none !important;
+}
+
 .drawer-header-actions {
   display: flex;
   align-items: center;
@@ -897,24 +904,34 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .btn-sub-tool {
-  background: #f1f5f9;
+  background: #f8fafc;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: #334155;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #065f46;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .btn-sub-tool:hover {
-  background: #e2e8f0;
-  color: #0f172a;
+  background: #ecfdf5;
+  border-color: #6ee7b7;
+  color: #047857;
+}
+
+.btn-sub-tool.active {
+  background: #059669;
+  border-color: #047857;
+  color: #ffffff;
 }
 
 .btn-reset-tool {
@@ -929,15 +946,31 @@ body {
 
 /* 인라인 코스 추가 폼 */
 .add-course-form {
-  background: #ffffff;
+  background: #f0fdf4;
   border: 1px solid #a7f3d0;
-  border-radius: 8px;
-  padding: 10px 12px;
+  border-radius: 10px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  gap: 10px;
+  margin-top: 10px;
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.08);
+  animation: formSlideDown 0.22s ease-out;
+}
+
+.add-course-form.hidden {
+  display: none !important;
+}
+
+@keyframes formSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .add-course-form input, .add-course-form select {

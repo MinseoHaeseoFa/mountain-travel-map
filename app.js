@@ -379,8 +379,14 @@ function openMountainDrawer(mId) {
   document.getElementById('climb-weather-input').value = rec.weather || '';
   document.getElementById('climb-memo').value = rec.memo || '';
 
-  // 코스 추가 인라인 폼 닫기
-  document.getElementById('add-course-form').classList.add('hidden');
+  // 코스 추가 인라인 폼 닫기 및 버튼 상태 초기화
+  const addCourseFormEl = document.getElementById('add-course-form');
+  const btnToggleAddCourseEl = document.getElementById('btn-toggle-add-course');
+  if (addCourseFormEl) addCourseFormEl.classList.add('hidden');
+  if (btnToggleAddCourseEl) {
+    btnToggleAddCourseEl.textContent = '+ 나만의 코스 추가';
+    btnToggleAddCourseEl.classList.remove('active');
+  }
 
   drawer.classList.remove('hidden');
 
@@ -679,14 +685,23 @@ function initUI() {
   const btnResetCourses = document.getElementById('btn-reset-courses');
 
   btnToggleAddCourse.addEventListener('click', () => {
-    addCourseForm.classList.toggle('hidden');
-    if (!addCourseForm.classList.contains('hidden')) {
+    const isHidden = addCourseForm.classList.contains('hidden');
+    if (isHidden) {
+      addCourseForm.classList.remove('hidden');
+      btnToggleAddCourse.textContent = '✕ 코스 추가 닫기';
+      btnToggleAddCourse.classList.add('active');
       document.getElementById('new-course-name').focus();
+    } else {
+      addCourseForm.classList.add('hidden');
+      btnToggleAddCourse.textContent = '+ 나만의 코스 추가';
+      btnToggleAddCourse.classList.remove('active');
     }
   });
 
   btnCancelNewCourse.addEventListener('click', () => {
     addCourseForm.classList.add('hidden');
+    btnToggleAddCourse.textContent = '+ 나만의 코스 추가';
+    btnToggleAddCourse.classList.remove('active');
   });
 
   btnSubmitNewCourse.addEventListener('click', () => {
@@ -712,6 +727,8 @@ function initUI() {
     document.getElementById('new-course-name').value = '';
     document.getElementById('new-course-meta').value = '';
     addCourseForm.classList.add('hidden');
+    btnToggleAddCourse.textContent = '+ 나만의 코스 추가';
+    btnToggleAddCourse.classList.remove('active');
 
     const allM = getAllMountains();
     const m = allM.find(item => item.id == selectedMountainId);
