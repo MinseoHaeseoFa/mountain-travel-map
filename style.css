@@ -274,10 +274,39 @@ body {
   border-color: #94a3b8;
 }
 
-.btn-random {
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  border-color: #a7f3d0;
-  color: #065f46;
+.btn-add-mountain {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  border-color: #059669;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.btn-add-mountain:hover {
+  background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.btn-delete-mountain {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-right: 6px;
+}
+
+.btn-delete-mountain:hover {
+  background: #fca5a5;
+  color: #7f1d1d;
+}
+
+.drawer-header-actions {
+  display: flex;
+  align-items: center;
 }
 
 .btn-random:hover {
@@ -775,6 +804,13 @@ body {
   line-height: 1.45;
 }
 
+.section-guide-text {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
 /* 🥾 대표 등산 코스 */
 .courses-list {
   display: flex;
@@ -790,6 +826,160 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.course-item.course-completed {
+  background: #f0fdf4;
+  border-color: #34d399;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.12);
+}
+
+.course-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.course-check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.course-checkbox {
+  width: 17px;
+  height: 17px;
+  accent-color: #059669;
+  cursor: pointer;
+}
+
+.course-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.course-completed .course-name {
+  color: #065f46;
+}
+
+.course-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-del-course {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.btn-del-course:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* 코스 추가 및 복원 도구 */
+.course-action-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.btn-sub-tool {
+  background: #f1f5f9;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-sub-tool:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.btn-reset-tool {
+  color: #b45309;
+  background: #fef3c7;
+  border-color: #fde68a;
+}
+
+.btn-reset-tool:hover {
+  background: #fde68a;
+}
+
+/* 인라인 코스 추가 폼 */
+.add-course-form {
+  background: #ffffff;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.add-course-form input, .add-course-form select {
+  height: 32px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0 8px;
+  font-size: 0.76rem;
+  outline: none;
+}
+
+.add-course-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 6px;
+}
+
+.add-course-btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.btn-action-sm {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-confirm {
+  background: #059669;
+  color: #ffffff;
+}
+
+.btn-cancel {
+  background: #e2e8f0;
+  color: #475569;
 }
 
 .course-header {
@@ -1002,6 +1192,128 @@ body {
   max-width: 480px;
   padding: 24px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modal-box.modal-lg {
+  max-width: 560px;
+}
+
+.modal-sub-p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 4px;
+}
+
+.modal-label .req {
+  color: #ef4444;
+}
+
+.modal-box input, .modal-box select {
+  width: 100%;
+  height: 36px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.modal-box input:focus, .modal-box select:focus {
+  border-color: #059669;
+  background: #ffffff;
+}
+
+.input-with-btn {
+  display: flex;
+  gap: 6px;
+}
+
+.input-with-btn input {
+  margin-bottom: 0;
+}
+
+.btn-search-helper {
+  height: 36px;
+  padding: 0 10px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #065f46;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-search-helper:hover {
+  background: #d1fae5;
+}
+
+.search-links-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+.links-title {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.quick-link {
+  font-size: 0.74rem;
+  color: #0284c7;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.modal-actions-horizontal {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-confirm-main {
+  flex: 2;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  border: none;
+}
+
+.btn-confirm-main:hover {
+  background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
+}
+
+.btn-cancel-main {
+  flex: 1;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid var(--border-color);
 }
 
 .modal-header {

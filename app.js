@@ -1,17 +1,49 @@
 /**
- * 100대 명산 & 트래킹 지도 (Mountain Travel Map) v1.0
- * 산림청·블랙야크 공인 대한민국 100대 명산 인터랙티브 완등 아카이브
+ * 100대 명산 & 트래킹 지도 (Mountain Travel Map) v2.0
+ * 산림청·블랙야크 공인 100대 명산 + 나만의 산 추가 + 등산 코스 선택/추가/삭제
  */
 
 const STORAGE_KEY = 'korea_100_mountains_records_v1';
+const CUSTOM_MOUNTAINS_KEY = 'korea_custom_mountains_v1';
 
 // 대한민국 지도 데이터 전역 바인딩 호환성 보장
 if (typeof KOREA_167_GEO !== 'undefined' && typeof KOREA_MAP_167_DATA === 'undefined') {
   window.KOREA_MAP_167_DATA = KOREA_167_GEO;
 }
 
+// 100대 명산 외 대표 유명 산 GPS 사전 (자동 완성 및 스마트 좌표 지원)
+const POPULAR_MOUNTAIN_PRESETS = {
+  "인왕산": { lat: 37.5882, lng: 126.9609, alt: 338, region: "수도권", loc: "서울 종로구·서대문구", reason: "한양도성 성곽길과 기차바위, 서울 도심 파노라마 조망 명소", course: "사직단 ~ 범바위 ~ 인왕산 정상" },
+  "청계산": { lat: 37.4452, lng: 127.0569, alt: 618, region: "수도권", loc: "서울 서초구 / 경기 성남·과천·의왕", reason: "수도권 등산객이 가장 많이 찾는 매봉·매바위 힐링 코스", course: "원터골입구 ~ 길마재 ~ 매봉 정상" },
+  "아차산": { lat: 37.5539, lng: 127.0989, alt: 295, region: "수도권", loc: "서울 광진구 / 경기 구리시", reason: "한강과 서울 동부권이 한눈에 내려다보이는 해맞이 명산", course: "아차산생태공원 ~ 고구려정 ~ 해맞이광장 ~ 아차산 정상" },
+  "용마산": { lat: 37.5744, lng: 127.0864, alt: 348, region: "수도권", loc: "서울 중랑구·광진구", reason: "용마폭포공원과 아차산 연계 능선 종주 인기 코스", course: "용마산역 ~ 팔각정 ~ 용마봉 정상" },
+  "수락산": { lat: 37.6975, lng: 127.0811, alt: 638, region: "수도권", loc: "서울 노원구 / 경기 의정부·남양주", reason: "기암괴석과 홈통바위(기차바위) 암릉 타는 스릴 명산", course: "수락산역 ~ 염불사 ~ 깔딱고개 ~ 주봉 정상" },
+  "불암산": { lat: 37.6583, lng: 127.0908, alt: 508, region: "수도권", loc: "서울 노원구 / 경기 남양주시", reason: "부처의 형상을 닮은 거대한 화강암 돔과 서울 야경 명소", course: "상계역 ~ 불암산나비정원 ~ 깔딱고개 ~ 정상" },
+  "예봉산": { lat: 37.5683, lng: 127.2436, alt: 683, region: "수도권", loc: "경기 남양주시 와부읍", reason: "팔당호와 두물머리가 시원하게 펼쳐지는 강변 조망 명산", course: "팔당역 ~ 예봉산 정상 ~ 적갑산" },
+  "검단산": { lat: 37.5275, lng: 127.2344, alt: 657, region: "수도권", loc: "경기 하남시·광주시", reason: "한강과 북한강 합수부 조망, 백제 검단선사의 유서", course: "애니메이션고 ~ 유길준묘 ~ 전망대 ~ 정상" },
+  "광교산": { lat: 37.3486, lng: 127.0306, alt: 582, region: "수도권", loc: "경기 수원시 장안구 / 용인시 수지구", reason: "수원과 용인을 품은 부드러운 육산 능선과 시루봉", course: "경기대 ~ 형제봉 ~ 비로봉 ~ 시루봉" },
+  "모락산": { lat: 37.3622, lng: 126.9856, alt: 385, region: "수도권", loc: "경기 의왕시 오전동", reason: "임진왜란 전적지이자 수려한 암릉 전망대", course: "LG아파트 ~ 모락산 국기봉 ~ 사인암" },
+  "수리산": { lat: 37.3517, lng: 126.9083, alt: 489, region: "수도권", loc: "경기 군포·안양·안산", reason: "태을봉과 수암봉 칼바위 능선의 경기 도립공원", course: "산본역 ~ 산림욕장 ~ 태을봉 정상" },
+  "유달산": { lat: 34.7878, lng: 126.3708, alt: 228, region: "전라권", loc: "전남 목포시 유달동", reason: "목포항과 다도해를 굽어보는 영혼의 산, 일등바위", course: "노적봉 ~ 달성각 ~ 유선각 ~ 일등바위" },
+  "앞산": { lat: 35.8239, lng: 128.5833, alt: 659, region: "경상권", loc: "대구 남구 대명동", reason: "대구 도심 파노라마 전망대와 앞산 케이블카", course: "안지랑골 ~ 안일사 ~ 앞산전망대 ~ 정상" },
+  "황령산": { lat: 35.1583, lng: 129.0833, alt: 427, region: "경상권", loc: "부산 부산진구·남구·연제구", reason: "광안대교와 부산 전역이 360도 펼쳐지는 황홀한 야경", course: "황령산봉수대 ~ 사자봉 ~ 바람고개" },
+  "송악산": { lat: 33.2056, lng: 126.2917, alt: 104, region: "제주권", loc: "제주 서귀포시 대정읍", reason: "가파도·마라도가 손에 잡힐 듯 펼쳐지는 해안 둘레길", course: "송악산 주차장 ~ 해안절벽 탐방로 ~ 송악산 분화구" },
+  "성산일출봉": { lat: 33.4586, lng: 126.9425, alt: 182, region: "제주권", loc: "제주 서귀포시 성산읍", reason: "유네스코 세계자연유산이자 바다 위 거대한 화산 분화구", course: "매표소 ~ 정상 전망대 ~ 하산 데크길" }
+};
+
+// 권역별 기본 중심 좌표
+const REGION_CENTERS = {
+  "수도권": { lat: 37.55, lng: 127.05 },
+  "강원권": { lat: 37.75, lng: 128.35 },
+  "충청권": { lat: 36.45, lng: 127.35 },
+  "전라권": { lat: 35.30, lng: 127.10 },
+  "경상권": { lat: 35.65, lng: 128.60 },
+  "제주권": { lat: 33.38, lng: 126.55 }
+};
+
 // 상태 관리
 let climbRecords = {};
+let customMountains = [];
 let selectedMountainId = null;
 let showLabels = true;
 let currentFilter = 'all';
@@ -54,10 +86,19 @@ svg.call(zoom);
 // 초기화 실행
 document.addEventListener('DOMContentLoaded', () => {
   loadRecords();
+  loadCustomMountains();
   initMap();
   initUI();
   updateStats();
 });
+
+/**
+ * 100대 명산 + 나만의 산 통합 전체 목록 반환
+ */
+function getAllMountains() {
+  const base = (typeof MOUNTAINS_100_DATA !== 'undefined') ? MOUNTAINS_100_DATA : [];
+  return [...base, ...customMountains];
+}
 
 /**
  * 로컬 스토리지 데이터 로드
@@ -75,6 +116,21 @@ function loadRecords() {
 }
 
 /**
+ * 나만의 산 로드
+ */
+function loadCustomMountains() {
+  try {
+    const saved = localStorage.getItem(CUSTOM_MOUNTAINS_KEY);
+    if (saved) {
+      customMountains = JSON.parse(saved);
+    }
+  } catch (e) {
+    console.error('Failed to load custom mountains', e);
+    customMountains = [];
+  }
+}
+
+/**
  * 로컬 스토리지 데이터 저장
  */
 function saveRecords() {
@@ -84,6 +140,19 @@ function saveRecords() {
     updateMapPins();
   } catch (e) {
     console.error('Failed to save climb records', e);
+  }
+}
+
+/**
+ * 나만의 산 저장
+ */
+function saveCustomMountains() {
+  try {
+    localStorage.setItem(CUSTOM_MOUNTAINS_KEY, JSON.stringify(customMountains));
+    updateStats();
+    renderMountainMarkers();
+  } catch (e) {
+    console.error('Failed to save custom mountains', e);
   }
 }
 
@@ -131,50 +200,79 @@ function initMap() {
       .text(d => `${d.properties.fullName || d.properties.name}`);
   }
 
-  // 2. 100대 명산 마커 핀 렌더링
-  if (typeof MOUNTAINS_100_DATA !== 'undefined') {
-    const markers = gMountains.selectAll('.mountain-marker')
-      .data(MOUNTAINS_100_DATA)
-      .enter()
-      .append('g')
-      .attr('class', 'mountain-marker')
-      .attr('id', d => `mountain-${d.id}`)
-      .attr('transform', d => {
-        const pt = projection([d.lng, d.lat]);
-        return `translate(${pt[0]}, ${pt[1]})`;
-      })
-      .on('mouseenter', (event, d) => handleMouseEnter(event, d))
-      .on('mousemove', (event) => handleMouseMove(event))
-      .on('mouseleave', () => handleMouseLeave())
-      .on('click', (event, d) => {
-        event.stopPropagation();
-        openMountainDrawer(d.id);
-      });
-
-    // 핀 베이스 원형
-    markers.append('circle')
-      .attr('class', 'pin-base')
-      .attr('r', 6.5)
-      .attr('fill', d => getPinColor(d.id));
-
-    // 3. 산 이름 라벨 레이어
-    gLabels.selectAll('text')
-      .data(MOUNTAINS_100_DATA)
-      .enter()
-      .append('text')
-      .attr('class', 'mountain-label')
-      .attr('transform', d => {
-        const pt = projection([d.lng, d.lat]);
-        return `translate(${pt[0]}, ${pt[1] - 9})`;
-      })
-      .text(d => d.name)
-      .style('display', showLabels ? 'block' : 'none');
-  }
+  // 2. 전체 명산 마커 핀 렌더링
+  renderMountainMarkers();
 
   // 배경 클릭 시 서랍 닫기
   svg.on('click', () => {
     closeDrawer();
   });
+}
+
+/**
+ * 마커 핀 및 라벨 전체 렌더링
+ */
+function renderMountainMarkers() {
+  const allM = getAllMountains();
+
+  // 1. 마커 핀
+  const markers = gMountains.selectAll('.mountain-marker')
+    .data(allM, d => d.id);
+
+  markers.exit().remove();
+
+  const enterMarkers = markers.enter()
+    .append('g')
+    .attr('class', 'mountain-marker')
+    .attr('id', d => `mountain-${d.id}`)
+    .attr('transform', d => {
+      const pt = projection([d.lng, d.lat]);
+      return `translate(${pt[0]}, ${pt[1]})`;
+    })
+    .on('mouseenter', (event, d) => handleMouseEnter(event, d))
+    .on('mousemove', (event) => handleMouseMove(event))
+    .on('mouseleave', () => handleMouseLeave())
+    .on('click', (event, d) => {
+      event.stopPropagation();
+      openMountainDrawer(d.id);
+    });
+
+  enterMarkers.append('circle')
+    .attr('class', 'pin-base')
+    .attr('r', d => d.isCustom ? 7.5 : 6.5)
+    .attr('fill', d => getPinColor(d.id))
+    .attr('stroke', d => d.isCustom ? '#f59e0b' : '#ffffff')
+    .attr('stroke-width', d => d.isCustom ? 2 : 1.5);
+
+  // 기존 마커 갱신
+  markers.attr('transform', d => {
+    const pt = projection([d.lng, d.lat]);
+    return `translate(${pt[0]}, ${pt[1]})`;
+  });
+  markers.select('circle.pin-base')
+    .attr('fill', d => getPinColor(d.id));
+
+  // 2. 산 이름 라벨
+  const labels = gLabels.selectAll('text')
+    .data(allM, d => d.id);
+
+  labels.exit().remove();
+
+  labels.enter()
+    .append('text')
+    .attr('class', 'mountain-label')
+    .attr('transform', d => {
+      const pt = projection([d.lng, d.lat]);
+      return `translate(${pt[0]}, ${pt[1] - 9})`;
+    })
+    .text(d => d.name)
+    .style('display', showLabels ? 'block' : 'none');
+
+  labels.attr('transform', d => {
+    const pt = projection([d.lng, d.lat]);
+    return `translate(${pt[0]}, ${pt[1] - 9})`;
+  })
+  .style('display', showLabels ? 'block' : 'none');
 }
 
 /**
@@ -198,7 +296,8 @@ function handleMouseEnter(event, d) {
     else if (rec.status === 'bucket') statusText = '🌟 가고 싶은 산';
   }
 
-  document.getElementById('tt-name').textContent = d.name;
+  const customBadge = d.isCustom ? ' ✨ 나만의 산' : '';
+  document.getElementById('tt-name').textContent = d.name + customBadge;
   document.getElementById('tt-alt').textContent = `해발 ${d.altitude.toLocaleString()}m (${d.altName || ''})`;
   document.getElementById('tt-status').textContent = statusText;
   document.getElementById('tt-info').textContent = `${d.location} · ${d.region}`;
@@ -227,7 +326,8 @@ function handleMouseLeave() {
  * 상세 서랍 열기
  */
 function openMountainDrawer(mId) {
-  const m = MOUNTAINS_100_DATA.find(item => item.id === mId);
+  const allM = getAllMountains();
+  const m = allM.find(item => item.id == mId);
   if (!m) return;
 
   selectedMountainId = mId;
@@ -237,7 +337,7 @@ function openMountainDrawer(mId) {
   d3.select(`#mountain-${mId}`).classed('active-selected', true);
 
   // 정보 채우기
-  document.getElementById('drawer-region').textContent = m.region;
+  document.getElementById('drawer-region').textContent = m.region + (m.isCustom ? ' (나만의 산)' : '');
   document.getElementById('drawer-name').textContent = m.name;
   document.getElementById('drawer-alt-name').textContent = m.altName || '';
   document.getElementById('drawer-altitude').textContent = `${m.altitude.toLocaleString()}m`;
@@ -245,11 +345,31 @@ function openMountainDrawer(mId) {
   document.getElementById('drawer-reason').textContent = m.reason;
   document.getElementById('drawer-location').textContent = m.location;
 
+  // 나만의 산 삭제 버튼 토글
+  const btnDeleteM = document.getElementById('btn-delete-custom-mountain');
+  if (m.isCustom) {
+    btnDeleteM.classList.remove('hidden');
+  } else {
+    btnDeleteM.classList.add('hidden');
+  }
+
   // 기록 불러오기
   if (!climbRecords[mId]) {
-    climbRecords[mId] = { status: null, date: '', companion: '', weather: '', memo: '' };
+    climbRecords[mId] = { 
+      status: null, 
+      date: '', 
+      companion: '', 
+      weather: '', 
+      memo: '',
+      selectedCourses: [],
+      deletedCourseNames: [],
+      customCourses: []
+    };
   }
   const rec = climbRecords[mId];
+  if (!rec.selectedCourses) rec.selectedCourses = [];
+  if (!rec.deletedCourseNames) rec.deletedCourseNames = [];
+  if (!rec.customCourses) rec.customCourses = [];
 
   updateDrawerStatusUI(rec.status);
   renderCoursesList(m);
@@ -258,6 +378,9 @@ function openMountainDrawer(mId) {
   document.getElementById('climb-companion-input').value = rec.companion || '';
   document.getElementById('climb-weather-input').value = rec.weather || '';
   document.getElementById('climb-memo').value = rec.memo || '';
+
+  // 코스 추가 인라인 폼 닫기
+  document.getElementById('add-course-form').classList.add('hidden');
 
   drawer.classList.remove('hidden');
 
@@ -311,54 +434,141 @@ function updateDrawerStatusUI(status) {
 }
 
 /**
- * 대표 등산 코스 렌더링
+ * 등산 코스 렌더링 (다녀온 코스 선택, 개별 삭제, 직접 추가 지원)
  */
 function renderCoursesList(m) {
   const container = document.getElementById('courses-list');
   container.innerHTML = '';
 
-  const courses = m.courses || [];
-  document.getElementById('courses-count').textContent = `(${courses.length}개 코스)`;
+  const rec = climbRecords[m.id];
+  const selectedList = rec.selectedCourses || [];
+  const deletedList = rec.deletedCourseNames || [];
+  const customList = rec.customCourses || [];
 
-  courses.forEach(c => {
+  // 1. 기본 코스 중 삭제되지 않은 코스
+  const baseCourses = (m.courses || []).filter(c => !deletedList.includes(c.name));
+  
+  // 2. 전체 활성 코스 목록
+  const activeCourses = [...baseCourses, ...customList];
+
+  // 완주 체크 카운터 갱신
+  const completedCount = activeCourses.filter(c => selectedList.includes(c.name)).length;
+  document.getElementById('courses-count').textContent = `(총 ${activeCourses.length}개 중 ${completedCount}개 완주 🥾)`;
+
+  // 복원 버튼 노출 여부
+  const btnReset = document.getElementById('btn-reset-courses');
+  if (deletedList.length > 0 || customList.length > 0) {
+    btnReset.classList.remove('hidden');
+  } else {
+    btnReset.classList.add('hidden');
+  }
+
+  if (activeCourses.length === 0) {
+    container.innerHTML = '<div style="padding:10px;color:#94a3b8;font-size:0.78rem;text-align:center;">등록된 코스가 없습니다. 아래에서 나만의 코스를 추가해 보세요!</div>';
+    return;
+  }
+
+  activeCourses.forEach((c, idx) => {
+    const isCompleted = selectedList.includes(c.name);
     const item = document.createElement('div');
-    item.className = 'course-item';
+    item.className = `course-item ${isCompleted ? 'course-completed' : ''}`;
 
     const header = document.createElement('div');
     header.className = 'course-header';
+
+    // 체크박스 & 코스명
+    const checkLabel = document.createElement('label');
+    checkLabel.className = 'course-check-label';
+    checkLabel.title = '내가 다녀온 코스로 체크';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'course-checkbox';
+    checkbox.checked = isCompleted;
+
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        if (!rec.selectedCourses.includes(c.name)) {
+          rec.selectedCourses.push(c.name);
+        }
+        // 코스를 하나라도 체크하면 자동으로 완등 상태로 전환
+        if (!rec.status) {
+          rec.status = 'visited';
+          updateDrawerStatusUI('visited');
+        }
+      } else {
+        rec.selectedCourses = rec.selectedCourses.filter(name => name !== c.name);
+      }
+      saveRecords();
+      renderCoursesList(m);
+      showToast(checkbox.checked ? `🥾 [${c.name}] 완주 코스로 체크했습니다!` : `[${c.name}] 완주 체크를 해제했습니다.`);
+    });
 
     const nameSpan = document.createElement('span');
     nameSpan.className = 'course-name';
     nameSpan.textContent = c.name;
 
+    checkLabel.appendChild(checkbox);
+    checkLabel.appendChild(nameSpan);
+
+    // 우측: 난이도 뱃지 및 삭제 버튼
+    const rightHeader = document.createElement('div');
+    rightHeader.className = 'course-header-right';
+
     const diffBadge = document.createElement('span');
-    diffBadge.className = `diff-badge diff-${c.difficulty}`;
-    diffBadge.textContent = `난이도 ${c.difficulty}`;
+    diffBadge.className = `diff-badge diff-${c.difficulty || '중'}`;
+    diffBadge.textContent = `난이도 ${c.difficulty || '중'}`;
 
-    header.appendChild(nameSpan);
-    header.appendChild(diffBadge);
+    const btnDel = document.createElement('button');
+    btnDel.className = 'btn-del-course';
+    btnDel.title = '이 코스 삭제';
+    btnDel.textContent = '✕';
+    btnDel.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (confirm(`'${c.name}' 코스를 삭제하시겠습니까?`)) {
+        if (customList.some(item => item.name === c.name)) {
+          rec.customCourses = rec.customCourses.filter(item => item.name !== c.name);
+        } else {
+          rec.deletedCourseNames.push(c.name);
+        }
+        rec.selectedCourses = rec.selectedCourses.filter(name => name !== c.name);
+        saveRecords();
+        renderCoursesList(m);
+        showToast(`🗑️ [${c.name}] 코스를 삭제했습니다.`);
+      }
+    });
 
+    rightHeader.appendChild(diffBadge);
+    rightHeader.appendChild(btnDel);
+
+    header.appendChild(checkLabel);
+    header.appendChild(rightHeader);
+
+    // 메타 정보 및 지도 링크
     const meta = document.createElement('div');
     meta.className = 'course-meta';
 
     const infoSpan = document.createElement('span');
-    infoSpan.textContent = `거리: ${c.dist} · 소요시간: 약 ${c.time}`;
+    infoSpan.textContent = `거리: ${c.dist || '-'} · 소요시간: 약 ${c.time || '-'}`;
 
     const linksDiv = document.createElement('div');
     linksDiv.className = 'course-links';
 
+    // 네이버 지도 & 카카오맵 검색어 정밀화 (링크 확실히 열리도록 수정)
+    const searchQuery = `${m.name} ${c.name}`;
+
     const naverLink = document.createElement('a');
     naverLink.className = 'map-btn naver-btn';
-    naverLink.href = `https://map.naver.com/p/search/${encodeURIComponent(m.name + ' ' + c.name)}`;
+    naverLink.href = `https://map.naver.com/p/search/${encodeURIComponent(searchQuery)}`;
     naverLink.target = '_blank';
-    naverLink.rel = 'noopener';
+    naverLink.rel = 'noopener noreferrer';
     naverLink.textContent = '네이버 지도';
 
     const kakaoLink = document.createElement('a');
     kakaoLink.className = 'map-btn kakao-btn';
-    kakaoLink.href = `https://map.kakao.com/?q=${encodeURIComponent(m.name + ' ' + c.name)}`;
+    kakaoLink.href = `https://map.kakao.com/?q=${encodeURIComponent(searchQuery)}`;
     kakaoLink.target = '_blank';
-    kakaoLink.rel = 'noopener';
+    kakaoLink.rel = 'noopener noreferrer';
     kakaoLink.textContent = '카카오맵';
 
     linksDiv.appendChild(naverLink);
@@ -377,7 +587,8 @@ function renderCoursesList(m) {
  * 종합 완등 통계 갱신
  */
 function updateStats() {
-  const total = 100;
+  const allM = getAllMountains();
+  const total = allM.length;
   let visitedCount = 0;
   let bucketCount = 0;
   let highPeaksCount = 0;
@@ -385,14 +596,14 @@ function updateStats() {
   Object.entries(climbRecords).forEach(([id, rec]) => {
     if (rec.status === 'visited') {
       visitedCount++;
-      const m = MOUNTAINS_100_DATA.find(item => item.id === parseInt(id));
+      const m = allM.find(item => item.id == id);
       if (m && m.altitude >= 1000) highPeaksCount++;
     } else if (rec.status === 'bucket') {
       bucketCount++;
     }
   });
 
-  const percent = ((visitedCount / total) * 100).toFixed(1);
+  const percent = total > 0 ? ((visitedCount / total) * 100).toFixed(1) : 0;
 
   document.getElementById('visited-count').textContent = visitedCount;
   document.getElementById('total-count').textContent = total;
@@ -418,7 +629,10 @@ function initUI() {
       const status = btn.getAttribute('data-status');
 
       if (!climbRecords[selectedMountainId]) {
-        climbRecords[selectedMountainId] = { status: null, date: '', companion: '', weather: '', memo: '' };
+        climbRecords[selectedMountainId] = { 
+          status: null, date: '', companion: '', weather: '', memo: '',
+          selectedCourses: [], deletedCourseNames: [], customCourses: [] 
+        };
       }
 
       climbRecords[selectedMountainId].status = status;
@@ -443,7 +657,10 @@ function initUI() {
     el.addEventListener('input', () => {
       if (!selectedMountainId) return;
       if (!climbRecords[selectedMountainId]) {
-        climbRecords[selectedMountainId] = { status: 'visited', date: '', companion: '', weather: '', memo: '' };
+        climbRecords[selectedMountainId] = { 
+          status: 'visited', date: '', companion: '', weather: '', memo: '',
+          selectedCourses: [], deletedCourseNames: [], customCourses: [] 
+        };
       }
       const rec = climbRecords[selectedMountainId];
       rec.date = document.getElementById('climb-date-input').value;
@@ -454,15 +671,99 @@ function initUI() {
     });
   });
 
-  // 5. 맨 하단 안심 💾 [등정 기록 저장 완료] 버튼
+  // 5. 코스 직접 추가 및 복원 버튼 이벤트
+  const btnToggleAddCourse = document.getElementById('btn-toggle-add-course');
+  const addCourseForm = document.getElementById('add-course-form');
+  const btnSubmitNewCourse = document.getElementById('btn-submit-new-course');
+  const btnCancelNewCourse = document.getElementById('btn-cancel-new-course');
+  const btnResetCourses = document.getElementById('btn-reset-courses');
+
+  btnToggleAddCourse.addEventListener('click', () => {
+    addCourseForm.classList.toggle('hidden');
+    if (!addCourseForm.classList.contains('hidden')) {
+      document.getElementById('new-course-name').focus();
+    }
+  });
+
+  btnCancelNewCourse.addEventListener('click', () => {
+    addCourseForm.classList.add('hidden');
+  });
+
+  btnSubmitNewCourse.addEventListener('click', () => {
+    if (!selectedMountainId) return;
+    const name = document.getElementById('new-course-name').value.trim();
+    const meta = document.getElementById('new-course-meta').value.trim();
+    const diff = document.getElementById('new-course-diff').value;
+
+    if (!name) {
+      alert('코스명을 입력해 주세요.');
+      return;
+    }
+
+    const rec = climbRecords[selectedMountainId];
+    if (!rec.customCourses) rec.customCourses = [];
+    rec.customCourses.push({
+      name,
+      dist: meta || '자유 거리',
+      time: '직접 지정',
+      difficulty: diff
+    });
+
+    document.getElementById('new-course-name').value = '';
+    document.getElementById('new-course-meta').value = '';
+    addCourseForm.classList.add('hidden');
+
+    const allM = getAllMountains();
+    const m = allM.find(item => item.id == selectedMountainId);
+    saveRecords();
+    if (m) renderCoursesList(m);
+    showToast(`🥾 [${name}] 코스를 추가했습니다!`);
+  });
+
+  btnResetCourses.addEventListener('click', () => {
+    if (!selectedMountainId) return;
+    if (confirm('모든 기본 등산 코스를 원래대로 복원하시겠습니까? (직접 추가한 코스도 초기화됩니다)')) {
+      const rec = climbRecords[selectedMountainId];
+      rec.deletedCourseNames = [];
+      rec.customCourses = [];
+      const allM = getAllMountains();
+      const m = allM.find(item => item.id == selectedMountainId);
+      saveRecords();
+      if (m) renderCoursesList(m);
+      showToast('기본 등산 코스를 모두 복원했습니다.');
+    }
+  });
+
+  // 6. 나만의 산 삭제 버튼
+  document.getElementById('btn-delete-custom-mountain').addEventListener('click', () => {
+    if (!selectedMountainId) return;
+    const allM = getAllMountains();
+    const m = allM.find(item => item.id == selectedMountainId);
+    if (!m || !m.isCustom) return;
+
+    if (confirm(`정말로 등록한 [${m.name}] 산을 지도에서 영구 삭제하시겠습니까?`)) {
+      customMountains = customMountains.filter(item => item.id != selectedMountainId);
+      delete climbRecords[selectedMountainId];
+      saveCustomMountains();
+      saveRecords();
+      closeDrawer();
+      showToast(`🗑️ [${m.name}] 산을 지도에서 삭제했습니다.`);
+    }
+  });
+
+  // 7. 맨 하단 안심 💾 [등정 기록 저장 완료] 버튼
   const saveBtn = document.getElementById('btn-save-confirm');
   saveBtn.addEventListener('click', () => {
     if (!selectedMountainId) return;
-    const m = MOUNTAINS_100_DATA.find(item => item.id === selectedMountainId);
+    const allM = getAllMountains();
+    const m = allM.find(item => item.id == selectedMountainId);
     const mName = m ? m.name : '해당 명산';
 
     if (!climbRecords[selectedMountainId]) {
-      climbRecords[selectedMountainId] = { status: 'visited', date: '', companion: '', weather: '', memo: '' };
+      climbRecords[selectedMountainId] = { 
+        status: 'visited', date: '', companion: '', weather: '', memo: '',
+        selectedCourses: [], deletedCourseNames: [], customCourses: [] 
+      };
     }
     const rec = climbRecords[selectedMountainId];
     rec.date = document.getElementById('climb-date-input').value;
@@ -491,7 +792,121 @@ function initUI() {
     showToast(`✅ [${mName}] 완등 기록이 안전하게 저장되었습니다! 💾`);
   });
 
-  // 6. 검색 기능
+  // 8. 신규 산 직접 추가 모달 이벤트
+  const addMountainModal = document.getElementById('add-mountain-modal');
+  const btnOpenAddM = document.getElementById('btn-add-mountain-open');
+  const btnCloseAddM = document.getElementById('btn-close-add-modal');
+  const btnCancelAddM = document.getElementById('btn-cancel-add-mountain');
+  const btnSubmitAddM = document.getElementById('btn-submit-add-mountain');
+  const nameInput = document.getElementById('custom-mountain-name');
+  const btnSearchHelper = document.getElementById('btn-search-mountain-info');
+  const linkNaver = document.getElementById('link-naver-search');
+  const linkGoogle = document.getElementById('link-google-search');
+
+  btnOpenAddM.addEventListener('click', () => {
+    addMountainModal.classList.remove('hidden');
+    nameInput.focus();
+  });
+
+  [btnCloseAddM, btnCancelAddM].forEach(btn => {
+    btn.addEventListener('click', () => {
+      addMountainModal.classList.add('hidden');
+    });
+  });
+
+  // 산 이름 입력 시 사전 매핑 & 검색 링크 자동 업데이트
+  nameInput.addEventListener('input', () => {
+    const val = nameInput.value.trim();
+    if (val) {
+      linkNaver.href = `https://map.naver.com/p/search/${encodeURIComponent(val + ' 등산로')}`;
+      linkGoogle.href = `https://www.google.com/search?q=${encodeURIComponent(val + ' 등산코스')}`;
+
+      // 사전 등록된 유명 산인 경우 자동 완성
+      if (POPULAR_MOUNTAIN_PRESETS[val]) {
+        const p = POPULAR_MOUNTAIN_PRESETS[val];
+        document.getElementById('custom-mountain-altitude').value = p.alt;
+        document.getElementById('custom-mountain-region').value = p.region;
+        document.getElementById('custom-mountain-location').value = p.loc;
+        document.getElementById('custom-mountain-reason').value = p.reason;
+        document.getElementById('custom-mountain-course').value = p.course;
+      }
+    }
+  });
+
+  btnSearchHelper.addEventListener('click', () => {
+    const val = nameInput.value.trim();
+    if (!val) {
+      alert('산 이름을 먼저 입력해 주세요.');
+      return;
+    }
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(val + ' 등산코스 해발고도')}`, '_blank');
+  });
+
+  btnSubmitAddM.addEventListener('click', () => {
+    const name = nameInput.value.trim();
+    if (!name) {
+      alert('산 이름을 입력해 주세요.');
+      return;
+    }
+
+    const region = document.getElementById('custom-mountain-region').value;
+    const alt = parseInt(document.getElementById('custom-mountain-altitude').value) || 500;
+    const loc = document.getElementById('custom-mountain-location').value.trim() || region;
+    const reason = document.getElementById('custom-mountain-reason').value.trim() || '내가 직접 추가한 명산';
+    const courseStr = document.getElementById('custom-mountain-course').value.trim();
+
+    // 좌표 결정 (사전 등록 여부 확인 -> 권역 중심 좌표 + 소폭 분산)
+    let lat = 37.5;
+    let lng = 127.0;
+
+    if (POPULAR_MOUNTAIN_PRESETS[name]) {
+      lat = POPULAR_MOUNTAIN_PRESETS[name].lat;
+      lng = POPULAR_MOUNTAIN_PRESETS[name].lng;
+    } else if (REGION_CENTERS[region]) {
+      const c = REGION_CENTERS[region];
+      // 동일 좌표 겹침 방지용 미세 랜덤 오프셋
+      lat = c.lat + (Math.random() - 0.5) * 0.25;
+      lng = c.lng + (Math.random() - 0.5) * 0.25;
+    }
+
+    const newCourses = courseStr ? [{ name: courseStr, dist: '추천 코스', time: '약 2시간', difficulty: '중' }] : [
+      { name: `${name} 정상 코스`, dist: '3.0km', time: '1시간 30분', difficulty: '중' }
+    ];
+
+    const newId = 'custom_' + Date.now();
+    const newMountain = {
+      id: newId,
+      isCustom: true,
+      name,
+      altName: '나만의 산',
+      altitude: alt,
+      region,
+      location: loc,
+      lat,
+      lng,
+      season: '사계절',
+      theme: reason,
+      reason,
+      courses: newCourses
+    };
+
+    customMountains.push(newMountain);
+    saveCustomMountains();
+
+    // 폼 초기화 및 닫기
+    nameInput.value = '';
+    document.getElementById('custom-mountain-altitude').value = '';
+    document.getElementById('custom-mountain-location').value = '';
+    document.getElementById('custom-mountain-reason').value = '';
+    document.getElementById('custom-mountain-course').value = '';
+    addMountainModal.classList.add('hidden');
+
+    // 서랍 바로 열기
+    openMountainDrawer(newId);
+    showToast(`⛰️ [${name}] 산을 지도에 성공적으로 등록했습니다! 🚀`);
+  });
+
+  // 9. 검색 기능
   const searchInput = document.getElementById('search-input');
   const searchDropdown = document.getElementById('search-dropdown');
 
@@ -503,7 +918,9 @@ function initUI() {
     }
 
     const matches = [];
-    MOUNTAINS_100_DATA.forEach(m => {
+    const allM = getAllMountains();
+
+    allM.forEach(m => {
       let score = 0;
       let matchType = '';
 
@@ -546,6 +963,7 @@ function initUI() {
           <span>⛰️</span>
           <strong>${item.m.name}</strong>
           <span style="font-size:0.74rem;color:#059669;">(${item.m.altitude}m)</span>
+          ${item.m.isCustom ? '<span style="font-size:0.65rem;background:#fef3c7;color:#b45309;padding:1px 4px;border-radius:4px;">나만의 산</span>' : ''}
         </div>
         <div class="search-item-sub">${item.matchType}</div>
       `;
@@ -566,15 +984,16 @@ function initUI() {
     }
   });
 
-  // 7. 🎲 어디 산에 갈까? 랜덤 추천기
+  // 10. 🎲 어디 산에 갈까? 랜덤 추천기
   document.getElementById('btn-random').addEventListener('click', () => {
-    const unclimbed = MOUNTAINS_100_DATA.filter(m => {
+    const allM = getAllMountains();
+    const unclimbed = allM.filter(m => {
       const rec = climbRecords[m.id];
       return !rec || !rec.status;
     });
 
     if (!unclimbed.length) {
-      alert('축하합니다! 대한민국 100대 명산을 모두 완등하셨습니다! 🥳🏔️');
+      alert('축하합니다! 등록된 모든 명산을 완등하셨습니다! 🥳🏔️');
       return;
     }
 
@@ -582,13 +1001,13 @@ function initUI() {
     openMountainDrawer(randM.id);
   });
 
-  // 8. 🏷️ 산 이름 라벨 토글
+  // 11. 🏷️ 산 이름 라벨 토글
   document.getElementById('btn-toggle-labels').addEventListener('click', () => {
     showLabels = !showLabels;
     gLabels.selectAll('text').style('display', showLabels ? 'block' : 'none');
   });
 
-  // 9. 줌 컨트롤
+  // 12. 줌 컨트롤
   document.getElementById('zoom-in').addEventListener('click', () => {
     svg.transition().duration(300).call(zoom.scaleBy, 1.4);
   });
@@ -599,7 +1018,7 @@ function initUI() {
     svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
   });
 
-  // 10. 권역 필터 칩
+  // 13. 권역 필터 칩
   document.querySelectorAll('.filter-chips .chip').forEach(chip => {
     chip.addEventListener('click', () => {
       document.querySelectorAll('.filter-chips .chip').forEach(c => c.classList.remove('active'));
@@ -627,7 +1046,7 @@ function initUI() {
     });
   });
 
-  // 11. 백업/복원 모달
+  // 14. 백업/복원 모달
   const backupModal = document.getElementById('backup-modal');
   document.getElementById('btn-backup-modal').addEventListener('click', () => {
     backupModal.classList.remove('hidden');
@@ -639,12 +1058,17 @@ function initUI() {
     if (e.target === backupModal) backupModal.classList.add('hidden');
   });
 
-  // JSON 다운로드
+  // JSON 다운로드 (완등 기록 + 나만의 산 통합 백업)
   document.getElementById('btn-download-json').addEventListener('click', () => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(climbRecords, null, 2));
+    const backupData = {
+      records: climbRecords,
+      customMountains: customMountains,
+      exportedAt: new Date().toISOString()
+    };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
     const dlAnchor = document.createElement('a');
     dlAnchor.setAttribute("href", dataStr);
-    dlAnchor.setAttribute("download", `korea-100-mountains-backup-${new Date().toISOString().slice(0,10)}.json`);
+    dlAnchor.setAttribute("download", `korea-mountains-backup-${new Date().toISOString().slice(0,10)}.json`);
     document.body.appendChild(dlAnchor);
     dlAnchor.click();
     dlAnchor.remove();
@@ -659,10 +1083,16 @@ function initUI() {
     reader.onload = (event) => {
       try {
         const parsed = JSON.parse(event.target.result);
-        if (typeof parsed === 'object') {
-          climbRecords = parsed;
+        if (parsed && typeof parsed === 'object') {
+          if (parsed.records) {
+            climbRecords = parsed.records;
+            customMountains = parsed.customMountains || [];
+          } else {
+            climbRecords = parsed;
+          }
           saveRecords();
-          alert('100대 명산 완등 기록 데이터를 성공적으로 복원했습니다!');
+          saveCustomMountains();
+          alert('100대 명산 완등 기록과 나만의 산 데이터를 성공적으로 복원했습니다!');
           backupModal.classList.add('hidden');
         }
       } catch (err) {
@@ -674,15 +1104,17 @@ function initUI() {
 
   // 데이터 초기화
   document.getElementById('btn-reset-data').addEventListener('click', () => {
-    if (confirm('정말로 모든 100대 명산 등정 기록을 초기화하시겠습니까? (되돌릴 수 없습니다)')) {
+    if (confirm('정말로 모든 완등 기록과 등록한 나만의 산을 초기화하시겠습니까? (되돌릴 수 없습니다)')) {
       climbRecords = {};
+      customMountains = [];
       saveRecords();
+      saveCustomMountains();
       backupModal.classList.add('hidden');
-      alert('모든 완등 기록이 초기화되었습니다.');
+      alert('모든 등정 기록이 초기화되었습니다.');
     }
   });
 
-  // 12. 📸 고화질 완등 지도 이미지 내보내기 (PNG)
+  // 15. 📸 고화질 완등 지도 이미지 내보내기 (PNG)
   document.getElementById('btn-export-image').addEventListener('click', exportMapAsImage);
 }
 
