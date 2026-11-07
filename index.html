@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100대 명산 & 트래킹 지도 (Mountain Travel Map) | 나의 여행 지도</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <!-- 상단 네비게이션 헤더 -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-area">
+        <span class="logo-icon">⛰️</span>
+        <div>
+          <h1 class="logo-title">100대 명산 & 트래킹 지도</h1>
+          <p class="logo-sub">산림청·블랙야크 공인 대한민국 100대 명산 완등기</p>
+        </div>
+      </div>
+
+      <!-- 상위 포털 바로가기 링크 -->
+      <a href="https://my-travel-map-kohl.vercel.app/" target="_blank" rel="noopener" class="hub-link-btn" title="나의 여행 지도 허브로 이동">
+        <span>🏠 나의 여행 지도 홈</span>
+      </a>
+    </div>
+
+    <!-- 통계 요약 바 (완등 현황) -->
+    <div class="stats-bar">
+      <div class="stat-item main-stat">
+        <span class="stat-label">100대 명산 완등</span>
+        <span class="stat-count"><b id="visited-count">0</b> / <span id="total-count">100</span>봉</span>
+        <span class="stat-percent" id="visit-percent">0.0%</span>
+      </div>
+      <div class="stat-progress-wrap">
+        <div class="stat-progress-bar" id="stat-progress-bar" style="width: 0%"></div>
+      </div>
+
+      <div class="level-badges">
+        <span class="level-badge badge-visited" title="완등 완료">🏆 <b id="lvl-visited">0</b></span>
+        <span class="level-badge badge-bucket" title="가고 싶은 산 (버킷리스트)">🌟 <b id="lvl-bucket">0</b></span>
+        <span class="level-badge badge-high" title="1,000m 이상 고봉">🏔️ <b id="lvl-high">0</b></span>
+      </div>
+    </div>
+
+    <!-- 우측 도구 바 -->
+    <div class="header-tools">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="산 이름, 지역, 코스 또는 계절 검색..." autocomplete="off">
+        <div id="search-dropdown" class="search-dropdown hidden"></div>
+      </div>
+      <button id="btn-random" class="tool-btn btn-random" title="미등정 명산 무작위 추천">🎲 어디 산에 갈까?</button>
+      <button id="btn-toggle-labels" class="tool-btn" title="지도 위 산 이름 라벨 표시 토글">🏷️ 산 이름</button>
+      <button id="btn-export-image" class="tool-btn" title="현재 완등 지도 고화질 이미지로 저장">📸 완등 지도 저장</button>
+      <button id="btn-backup-modal" class="tool-btn" title="데이터 백업 및 복원">💾 백업</button>
+    </div>
+  </header>
+
+  <!-- 권역 필터 칩 바 -->
+  <nav class="filter-bar">
+    <div class="filter-chips">
+      <button class="chip active" data-filter="all">전체 (100)</button>
+      <button class="chip" data-filter="수도권">수도권 (15)</button>
+      <button class="chip" data-filter="강원권">강원권 (28)</button>
+      <button class="chip" data-filter="충청권">충청권 (16)</button>
+      <button class="chip" data-filter="전라권">전라권 (17)</button>
+      <button class="chip" data-filter="경상권">경상권 (23)</button>
+      <button class="chip" data-filter="제주권">제주권 (1)</button>
+      <button class="chip chip-visited" data-filter="visited-only">🏆 완등한 산만</button>
+      <button class="chip chip-high" data-filter="high-peaks">🏔️ 1,000m 이상 고봉</button>
+    </div>
+  </nav>
+
+  <!-- 메인 지도 캔버스 -->
+  <main class="map-viewport" id="map-viewport">
+    <svg id="korea-mountain-svg"></svg>
+
+    <!-- 줌 컨트롤 버튼 -->
+    <div class="zoom-controls">
+      <button id="zoom-in" title="확대">+</button>
+      <button id="zoom-out" title="축소">−</button>
+      <button id="zoom-reset" title="전국 지도">전체</button>
+    </div>
+
+    <!-- 범례 -->
+    <div class="map-legend">
+      <div class="legend-title">등정 상태</div>
+      <div class="legend-item"><span class="legend-color color-visited"></span> 🏆 완등 인증</div>
+      <div class="legend-item"><span class="legend-color color-bucket"></span> 🌟 가고 싶은 산</div>
+      <div class="legend-item"><span class="legend-color color-unvisited"></span> ⬜ 미등정</div>
+    </div>
+
+    <!-- PC 호버 툴팁 -->
+    <div id="hover-tooltip" class="hover-tooltip hidden">
+      <div class="tooltip-header">
+        <span class="tooltip-icon" id="tt-icon">⛰️</span>
+        <div>
+          <span class="tooltip-name" id="tt-name">지리산</span>
+          <span class="tooltip-alt" id="tt-alt">해발 1,915m</span>
+        </div>
+        <span class="tooltip-status" id="tt-status">미등정</span>
+      </div>
+      <div class="tooltip-info" id="tt-info">소재지 · 권역</div>
+      <div class="tooltip-theme" id="tt-theme">선정 특징</div>
+      <div class="tooltip-hint">클릭하여 등정 인증 및 코스 확인 👆</div>
+    </div>
+  </main>
+
+  <!-- 상세 정보 및 기록 사이드 서랍 -->
+  <aside id="detail-drawer" class="detail-drawer hidden">
+    <!-- 서랍 헤더 -->
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <span class="drawer-mountain-icon">⛰️</span>
+        <div>
+          <div class="drawer-region-tag" id="drawer-region">강원권</div>
+          <h2 class="drawer-name" id="drawer-name">설악산</h2>
+          <div class="drawer-alt-name" id="drawer-alt-name">雪嶽山</div>
+        </div>
+      </div>
+      <button id="drawer-close" class="btn-close" title="닫기">✕</button>
+    </div>
+
+    <!-- 초슬림 컴팩트 메타 바 (해발고도, 소재지, 등정 상태) -->
+    <div class="compact-meta-bar">
+      <div class="compact-info-chips">
+        <span class="meta-pill high-pill">🏔️ <b id="drawer-altitude">1,708m</b></span>
+        <span class="meta-pill">🌸 <span id="drawer-season">가을·겨울</span></span>
+        <span id="current-status-tag" class="meta-pill status-pill-none">⬜ 미등정</span>
+      </div>
+      <div class="compact-status-group">
+        <button class="status-btn-pill" data-status="visited" title="완등 인증">🏆 완등</button>
+        <button class="status-btn-pill" data-status="bucket" title="가고 싶은 산">🌟 버킷</button>
+        <button class="status-btn-pill btn-clear-pill" id="btn-clear-status" title="미등정으로 취소">✕ 취소</button>
+      </div>
+    </div>
+
+    <div class="drawer-content">
+      <!-- 산림청 선정 사유 및 특징 -->
+      <div class="drawer-section">
+        <div class="section-title">📜 산림청 선정 사유 & 특징</div>
+        <div class="mountain-reason-card" id="drawer-reason">
+          백두대간의 중심으로 공룡능선과 울산바위 등 기암괴석의 절경.
+        </div>
+      </div>
+
+      <!-- 소재지 상세 안내 -->
+      <div class="drawer-section">
+        <div class="section-title">📍 상세 소재지</div>
+        <div class="mountain-loc-card" id="drawer-location">
+          강원 속초시 / 고성군 / 양양군 / 인제군
+        </div>
+      </div>
+
+      <!-- 🥾 대표 등산 코스 안내 -->
+      <div class="drawer-section">
+        <div class="section-title">
+          <span>🥾 대표 등산 코스</span>
+          <span class="sub-counter" id="courses-count">(3개 코스)</span>
+        </div>
+        <div id="courses-list" class="courses-list"></div>
+      </div>
+
+      <!-- 등정 인증 세부 기록 (날짜, 동행자, 날씨) -->
+      <div class="drawer-section record-section">
+        <div class="section-title">🏆 등정 인증 기록</div>
+        <div class="record-grid">
+          <div>
+            <label class="field-label">등정 일자</label>
+            <input type="text" id="climb-date-input" placeholder="예: 2025.10.15">
+          </div>
+          <div>
+            <label class="field-label">동행자</label>
+            <input type="text" id="climb-companion-input" placeholder="예: 혼산, 테니스클럽, 가족">
+          </div>
+        </div>
+        <div>
+          <label class="field-label">산행 날씨</label>
+          <input type="text" id="climb-weather-input" placeholder="예: 쾌청, 운해, 눈꽃, 안개">
+        </div>
+      </div>
+
+      <!-- 산행 메모 & 정상석 소감 -->
+      <div class="drawer-section">
+        <div class="section-title">📝 산행 메모 & 정상석 소감</div>
+        <textarea id="climb-memo" placeholder="정상석 인증 소감, 추천 들머리, 맛집, 주차 팁을 자유롭게 기록해 보세요..."></textarea>
+      </div>
+    </div>
+
+    <!-- 맨 하단 안심 💾 [등정 기록 저장 완료] 버튼 -->
+    <div class="drawer-bottom-sticky">
+      <button id="btn-save-confirm" class="btn-save-confirm">
+        <span class="save-icon">💾</span>
+        <span class="save-text">등정 기록 저장 완료</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 저장 완료 토스트 알림 -->
+  <div id="toast-message" class="toast-message hidden">
+    <span class="toast-icon">✅</span>
+    <span id="toast-text">등정 기록이 안전하게 저장되었습니다!</span>
+  </div>
+
+  <!-- 데이터 백업/복원 모달 -->
+  <div id="backup-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>💾 100대 명산 데이터 백업 및 관리</h3>
+        <button id="btn-close-modal" class="btn-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          모든 100대 명산 완등 기록과 산행 메모는 현재 브라우저에 안전하게 자동 저장되어 있습니다.<br>
+          기기 간 기록을 옮기거나 안전하게 보관하시려면 JSON 파일로 백업하고 복원하실 수 있습니다.
+        </p>
+        <div class="modal-actions">
+          <button id="btn-download-json" class="modal-btn btn-export">
+            📥 등정 기록 JSON 파일로 내보내기 (백업)
+          </button>
+          <label class="modal-btn btn-import">
+            📤 백업 파일 불러오기 (복원)
+            <input type="file" id="json-file-input" accept=".json" style="display:none;">
+          </label>
+          <button id="btn-reset-data" class="modal-btn btn-reset">
+            🗑️ 모든 등정 기록 초기화
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 데이터 파일 로드 -->
+  <script src="korea-map-data.js"></script>
+  <script src="mountains-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
