@@ -90,6 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initMap();
   initUI();
   updateStats();
+  // 자동 시트 연동: 로컬 완등 기록이 비어있으면 시트에서 자동 로드
+  if (Object.keys(climbRecords).length === 0) {
+    syncMountainPullFromSheet(false);
+  }
 });
 
 /**
@@ -1176,6 +1180,24 @@ function initUI() {
     }
   });
 
+  // 구글 시트 동기화 버튼 연동
+  const btnHeaderSync = document.getElementById('btn-header-sync');
+  if (btnHeaderSync) {
+    btnHeaderSync.addEventListener('click', () => {
+      backupModal.classList.remove('hidden');
+    });
+  }
+
+  const btnSyncPull = document.getElementById('btn-sync-pull');
+  if (btnSyncPull) {
+    btnSyncPull.addEventListener('click', () => syncMountainPullFromSheet(true));
+  }
+
+  const btnSyncPush = document.getElementById('btn-sync-push');
+  if (btnSyncPush) {
+    btnSyncPush.addEventListener('click', () => syncMountainPushToSheet());
+  }
+
   // 15. 📸 고화질 완등 지도 이미지 내보내기 (PNG)
   document.getElementById('btn-export-image').addEventListener('click', exportMapAsImage);
 }
@@ -1216,4 +1238,103 @@ function exportMapAsImage() {
   };
 
   img.src = url;
+}
+
+// --- Google Sheet Real-time Sync for 100 Mountains ---
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqiTEoPG98sJbNy8mP2hRlojmmgb_lGp7mb43KtBIepgVGO1QWee2i9FJ14n2yQYVz/exec';
+
+async function syncMountainPullFromSheet(showFeedback = true) {
+  const statusEl = document.getElementById('sync-status');
+  if (statusEl && showFeedback) {
+    statusEl.style.display = 'block';
+    statusEl.style.color = '#2563eb';
+    statusEl.textContent = '⏳ 구글 시트에서 최신 명산 완등 기록을 불러오는 중...';
+  }
+  try {
+    const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=mountain`);
+    const json = await res.json();
+    if (json && json.mountain) {
+      const incoming = json.mountain;
+      const count = Object.keys(incoming).length;
+      if (count === 0) {
+        if (statusEl && showFeedback) {
+          statusEl.style.display = 'block';
+          statusEl.style.color = '#64748b';
+          statusEl.textContent = 'ℹ️ 구글 시트에 아직 저장된 완등 기록이 없습니다.';
+        }
+        return;
+      }
+      Object.keys(incoming).forEach(id => {
+        const item = incoming[id];
+        let st = item.status;
+        if (st === 'climbed') st = 'visited';
+        climbRecords[id] = {
+          status: st,
+          climbedDate: item.climbedDate || '',
+          selectedCourse: item.selectedCourse || '',
+          memo: item.memo || ''
+        };
+      });
+      saveRecords();
+      if (statusEl && showFeedback) {
+        statusEl.style.display = 'block';
+        statusEl.style.color = '#059669';
+        statusEl.textContent = `✅ 구글 시트에서 ${count}개 산 기록을 성공적으로 불러왔습니다!`;
+      }
+    }
+  } catch (err) {
+    console.error('Mountain sync pull failed:', err);
+    if (statusEl && showFeedback) {
+      statusEl.style.display = 'block';
+      statusEl.style.color = '#dc2626';
+      statusEl.textContent = '❌ 동기화 실패: 네트워크 상태를 확인해 주세요.';
+    }
+  }
+}
+
+async function syncMountainPushToSheet() {
+  const statusEl = document.getElementById('sync-status');
+  if (statusEl) {
+    statusEl.style.display = 'block';
+    statusEl.style.color = '#2563eb';
+    statusEl.textContent = '⏳ 구글 시트로 현재 명산 완등 기록을 저장하는 중...';
+  }
+  try {
+    const count = Object.keys(climbRecords).length;
+    const dataToSend = {};
+    Object.keys(climbRecords).forEach(id => {
+      const r = climbRecords[id];
+      dataToSend[id] = {
+        status: r.status === 'visited' ? 'climbed' : (r.status === 'bucket' ? 'bucket' : 'none'),
+        climbedDate: r.climbedDate || '',
+        selectedCourse: r.selectedCourse || '',
+        memo: r.memo || ''
+      };
+    });
+    const payload = {
+      type: 'mountain',
+      data: dataToSend
+    };
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    if (json && json.status === 'ok') {
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.style.color = '#059669';
+        statusEl.textContent = `✅ 구글 시트에 ${count}개 산 기록을 저장했습니다! (PC·모바일 동기화 완료)`;
+      }
+    } else {
+      throw new Error((json && json.message) || '저장 실패');
+    }
+  } catch (err) {
+    console.error('Mountain sync push failed:', err);
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.style.color = '#dc2626';
+      statusEl.textContent = '❌ 저장 실패: 잠시 후 다시 시도해 주세요.';
+    }
+  }
 }
