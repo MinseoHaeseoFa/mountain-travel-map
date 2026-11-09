@@ -1228,10 +1228,10 @@ function exportMapAsImage() {
 
     ctx.font = 'bold 24px Pretendard, sans-serif';
     ctx.fillStyle = '#065f46';
-    ctx.fillText('대한민국 100대 명산 완등 지도 (Mountain Travel Map)', 40, canvas.height - 40);
+    ctx.fillText('나의 명산 & 트레킹 Trail Log', 40, canvas.height - 40);
 
     const a = document.createElement('a');
-    a.download = `korea-100-mountains-map-${new Date().toISOString().slice(0,10)}.png`;
+    a.download = `나의_명산_트레킹_Trail_Log_${new Date().toISOString().slice(0,10)}.png`;
     a.href = canvas.toDataURL('image/png');
     a.click();
     URL.revokeObjectURL(url);
