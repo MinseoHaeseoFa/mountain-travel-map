@@ -1268,14 +1268,31 @@ async function syncMountainPullFromSheet(showFeedback = true) {
         const item = incoming[id];
         let st = item.status;
         if (st === 'climbed') st = 'visited';
-        climbRecords[id] = {
-          status: st,
-          climbedDate: item.climbedDate || '',
-          selectedCourse: item.selectedCourse || '',
-          memo: item.memo || ''
-        };
+        if (!climbRecords[id]) {
+          climbRecords[id] = { 
+            status: null, date: '', companion: '', weather: '', memo: '',
+            selectedCourses: [], deletedCourseNames: [], customCourses: [] 
+          };
+        }
+        const rec = climbRecords[id];
+        rec.status = st || null;
+        rec.date = item.climbedDate || item.date || '';
+        rec.selectedCourses = Array.isArray(item.selectedCourses) ? item.selectedCourses : (item.selectedCourse ? [item.selectedCourse] : []);
+        rec.customCourses = Array.isArray(item.customCourses) ? item.customCourses : [];
+        rec.memo = item.memo || '';
       });
+      // 구글 시트에 저장된 나만의 산(customMountains) 복원
+      if (json.customMountains && Array.isArray(json.customMountains) && json.customMountains.length > 0) {
+        json.customMountains.forEach(cm => {
+          if (!customMountains.some(m => m.id === cm.id)) {
+            customMountains.push(cm);
+          }
+        });
+        saveCustomMountains();
+      }
       saveRecords();
+      renderMarkers();
+      updateStats();
       if (statusEl && showFeedback) {
         statusEl.style.display = 'block';
         statusEl.style.color = '#059669';
@@ -1306,14 +1323,16 @@ async function syncMountainPushToSheet() {
       const r = climbRecords[id];
       dataToSend[id] = {
         status: r.status === 'visited' ? 'climbed' : (r.status === 'bucket' ? 'bucket' : 'none'),
-        climbedDate: r.climbedDate || '',
-        selectedCourse: r.selectedCourse || '',
+        climbedDate: r.date || r.climbedDate || '',
+        selectedCourses: r.selectedCourses || (r.selectedCourse ? [r.selectedCourse] : []),
+        customCourses: r.customCourses || [],
         memo: r.memo || ''
       };
     });
     const payload = {
       type: 'mountain',
-      data: dataToSend
+      data: dataToSend,
+      customMountains: customMountains || []
     };
     const res = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
