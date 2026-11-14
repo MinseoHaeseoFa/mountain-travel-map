@@ -55,15 +55,15 @@ const tooltip = document.getElementById('hover-tooltip');
 const drawer = document.getElementById('detail-drawer');
 const toast = document.getElementById('toast-message');
 
-// SVG 크기 및 프로젝션 설정 (대한민국 전도 최적화)
-const width = 1000;
-const height = 950;
+// SVG 크기 및 프로젝션 설정 (대한민국 전도 최적화 - 컨테이너 크기에 맞춰 자동 확대)
+let width = 1000;
+let height = 950;
 
 svg.attr('viewBox', `0 0 ${width} ${height}`);
 
 const projection = d3.geoMercator()
   .center([127.75, 36.3])
-  .scale(5800)
+  .scale(7800)
   .translate([width / 2, height / 2]);
 
 const path = d3.geoPath().projection(projection);
@@ -193,7 +193,16 @@ function getPinColor(mId) {
 function initMap() {
   // 1. 대한민국 시군구 배경 레이어 렌더링
   const mapData = (typeof KOREA_MAP_167_DATA !== 'undefined') ? KOREA_MAP_167_DATA : ((typeof KOREA_167_GEO !== 'undefined') ? KOREA_167_GEO : null);
+  const mapContainer = document.querySelector('.map-wrapper') || document.querySelector('.map-container') || document.body;
+  const cw = mapContainer.clientWidth || window.innerWidth;
+  const ch = mapContainer.clientHeight || (window.innerHeight - 110);
+  if (cw > 0 && ch > 0) {
+    width = cw;
+    height = ch;
+    svg.attr('viewBox', `0 0 ${width} ${height}`);
+  }
   if (mapData && mapData.features) {
+    projection.fitSize([width, height], mapData);
     gLand.selectAll('path')
       .data(mapData.features)
       .enter()
