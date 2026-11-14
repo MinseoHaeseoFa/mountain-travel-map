@@ -90,10 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initMap();
   initUI();
   updateStats();
-  // 자동 시트 연동: 로컬 완등 기록이 비어있으면 시트에서 자동 로드
-  if (Object.keys(climbRecords).length === 0) {
-    syncMountainPullFromSheet(false);
-  }
+  // 자동 시트 연동: 앱 시작 시 항상 구글 시트 최신 기록과 동기화 (PC↔모바일 불일치 방지)
+  syncMountainPullFromSheet(false);
 });
 
 /**
