@@ -1258,7 +1258,7 @@ async function syncMountainPullFromSheet(showFeedback = true) {
     statusEl.textContent = '⏳ 구글 시트에서 최신 명산 완등 기록을 불러오는 중...';
   }
   try {
-    const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=mountain`);
+    const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=mountain&_t=${Date.now()}`, { cache: 'no-store' });
     const json = await res.json();
     if (json && json.mountain) {
       const incoming = json.mountain;
@@ -1271,6 +1271,8 @@ async function syncMountainPullFromSheet(showFeedback = true) {
         }
         return;
       }
+      // 구글 시트를 단일 기준(SSOT)으로 삼아 기존 로컬 캐시 잔여 기록 완전 교체
+      climbRecords = {};
       Object.keys(incoming).forEach(id => {
         const item = incoming[id];
         let st = item.status;
