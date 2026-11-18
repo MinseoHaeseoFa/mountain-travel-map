@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>나의 명산 & 트레킹 Trail Log (Korea Mountain Trail Log) | 나의 여행 지도</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20261118a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -105,6 +105,9 @@
         </div>
         <span class="tooltip-status" id="tt-status">미등정</span>
       </div>
+      <div class="tooltip-photo-wrap" id="tt-photo-wrap" style="display:none;">
+        <img id="tt-photo" class="tooltip-photo" alt="대표 사진" loading="lazy" decoding="async">
+      </div>
       <div class="tooltip-info" id="tt-info">소재지 · 권역</div>
       <div class="tooltip-theme" id="tt-theme">선정 특징</div>
       <div class="tooltip-hint">클릭하여 등정 인증 및 코스 확인 👆</div>
@@ -153,6 +156,23 @@
     </div>
 
     <div class="drawer-content">
+      <!-- 대표 이미지 (Trail Log Photos) -->
+      <div class="photo-card" id="photo-card">
+        <div class="photo-frame" id="photo-frame">
+          <img id="photo-img" class="photo-img" alt="대표 사진" loading="lazy" decoding="async">
+          <div class="photo-empty" id="photo-empty">
+            <span class="photo-empty-icon">📷</span>
+            <span class="photo-empty-text">이 산의 기억을 사진 한 장으로 남겨 보세요</span>
+          </div>
+        </div>
+        <div class="photo-actions">
+          <button type="button" class="photo-btn primary" id="btn-photo-upload">📷 대표 사진 등록</button>
+          <button type="button" class="photo-btn danger hidden" id="btn-photo-delete">🗑️ 삭제</button>
+        </div>
+        <div class="photo-status" id="photo-status"></div>
+        <input type="file" id="photo-file-input" accept="image/*" style="display:none">
+      </div>
+
       <!-- 산림청 선정 사유 및 특징 -->
       <div class="drawer-section">
         <div class="section-title">📜 산림청 선정 사유 & 특징</div>
@@ -363,6 +383,6 @@
   <!-- 데이터 파일 로드 -->
   <script src="korea-map-data.js"></script>
   <script src="mountains-data.js"></script>
-  <script src="app.js?v=20261115c"></script>
+  <script src="app.js?v=20261118a"></script>
 </body>
 </html>
