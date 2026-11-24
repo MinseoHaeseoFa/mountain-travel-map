@@ -1340,8 +1340,8 @@ async function syncMountainPullFromSheet(showFeedback = true) {
         saveCustomMountains();
       }
       saveRecords();
-      renderMarkers();
       updateStats();
+      updateMapPins();
       if (statusEl && showFeedback) {
         statusEl.style.display = 'block';
         statusEl.style.color = '#059669';
